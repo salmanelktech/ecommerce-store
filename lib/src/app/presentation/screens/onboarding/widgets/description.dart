@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+
 class DescriptionWidget extends StatefulWidget {
   final int index;
 
   const DescriptionWidget({Key? key, required this.index}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _DescriptionWidgetState createState() => _DescriptionWidgetState();
 }
 
@@ -12,15 +14,15 @@ class _DescriptionWidgetState extends State<DescriptionWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(),
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      decoration: const BoxDecoration(),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Text(
             _getDescription(),
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromRGBO(64, 64, 64, 1),
               fontFamily: 'Manrope',
               fontSize: 32,
@@ -29,11 +31,11 @@ class _DescriptionWidgetState extends State<DescriptionWidget> {
               height: 1.5,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             _getDescriptionDetail(),
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromRGBO(117, 117, 117, 1),
               fontFamily: 'Manrope',
               fontSize: 18,

@@ -1,8 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
+
 import 'package:eshop/src/app/presentation/routes/routes_navigator.dart';
-import 'package:eshop/src/app/presentation/screens/auth/login_screen.dart';
+import 'package:eshop/src/app/presentation/screens/auth%20copy/log_in.dart';
 import 'package:eshop/src/app/presentation/screens/onboarding/onboarding_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,6 +18,6 @@ class SplashServices {
     log("username $userId");
 
     RouteNavigator.pushandremoveroute(context,
-          isViewed != 0 ? const OnboardingScreen() : const LoginScreen());
+        isViewed != 0 ? const OnboardingScreen() : const SignInScreen());
   }
 }

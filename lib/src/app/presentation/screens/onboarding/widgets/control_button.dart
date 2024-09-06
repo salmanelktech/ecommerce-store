@@ -1,28 +1,27 @@
 import 'package:eshop/src/app/presentation/routes/routes_navigator.dart';
-import 'package:eshop/src/app/presentation/screens/auth/login_screen.dart';
+import 'package:eshop/src/app/presentation/screens/auth%20copy/log_in.dart';
 import 'package:eshop/src/app/presentation/screens/onboarding/widgets/button.dart';
 import 'package:eshop/src/app/presentation/screens/onboarding/widgets/description.dart';
 import 'package:eshop/src/app/presentation/theme/color_theme.dart';
 import 'package:eshop/src/app/presentation/utils/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class ControlButton extends StatelessWidget {
   const ControlButton({
     Key? key,
     required int current,
     required this.showNextButton,
-    required CarouselController controller,
+    required this.pageController,
     required this.totalItems,
   })  : _current = current,
-        _controller = controller,
         super(key: key);
 
   final int _current;
   final bool showNextButton;
-  final CarouselController _controller;
+  final PageController pageController;
   final int totalItems;
+
   _storeOnBoarding() async {
     int isViewed = 0;
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -39,29 +38,27 @@ class ControlButton extends StatelessWidget {
             index: _current,
           ),
           const SizedBox(height: 30),
-
-          // circleCarrusel(current: _current),
           const SizedBox(height: 35),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: kPadding * 2),
             child: Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                    onPressed: () {
-                      RouteNavigator.pushandremoveroute(
-                        context,
-                        const LoginScreen(),
-                      );
-                    },
-                    child: const Text(
-                      "Skip",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: kLightGreyColor,
-                      ),
-                    )),
+                  onPressed: () {
+                    RouteNavigator.pushandremoveroute(
+                      context,
+                      const SignInScreen(),
+                    );
+                  },
+                  child: const Text(
+                    "Skip",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: kLightGreyColor,
+                    ),
+                  ),
+                ),
                 const Spacer(),
                 for (int i = 0; i < 3; i++)
                   Center(
@@ -71,7 +68,9 @@ class ControlButton extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(horizontal: kPadding),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: _current == i ? kSecondaryColor : kSecondaryColor.withOpacity(0.2),
+                        color: _current == i
+                            ? kSecondaryColor
+                            : kSecondaryColor.withOpacity(0.2),
                       ),
                     ),
                   ),
@@ -83,10 +82,13 @@ class ControlButton extends StatelessWidget {
                       _storeOnBoarding();
                       RouteNavigator.pushandremoveroute(
                         context,
-                        const LoginScreen(),
+                        const SignInScreen(),
                       );
                     } else {
-                      _controller.nextPage();
+                      pageController.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
                     }
                   },
                 ),

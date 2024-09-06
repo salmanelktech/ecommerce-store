@@ -1,10 +1,7 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:eshop/src/app/presentation/screens/onboarding/widgets/control_button.dart';
 import 'package:eshop/src/app/presentation/screens/onboarding/widgets/semi_circle.dart';
 import 'package:eshop/src/app/presentation/utils/assets.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/svg.dart';
 
 class OnboardingCarrusel extends StatefulWidget {
@@ -15,21 +12,17 @@ class OnboardingCarrusel extends StatefulWidget {
 }
 
 class _OnboardingCarruselState extends State<OnboardingCarrusel> {
- 
- 
- 
- 
   int _current = 0;
-  final CarouselController _controller = CarouselController();
+  final PageController _pageController = PageController();
   final int totalItems = 3;
 
   bool showNextButton = false;
 
-  List<String> descriptions = [
-    "Biggest Sell at Your Fingerprint",
-    "Pay Secure Payment Gateway",
-    "Get Faster and Safe Delivery"
-  ];
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,37 +33,23 @@ class _OnboardingCarruselState extends State<OnboardingCarrusel> {
             Expanded(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
-                child: CarouselSlider(
-                  carouselController: _controller,
-                  options: CarouselOptions(
-                    height: MediaQuery.of(context).size.height,
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 1.0,
-                    initialPage: 0,
-                    enableInfiniteScroll: false,
-                    reverse: false,
-                    autoPlay: false,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: false,
-                    scrollDirection: Axis.horizontal,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _current = index;
-                        if (_current > 0) {
-                          showNextButton = true;
-                        } else {
-                          showNextButton = false;
-                        }
-                      });
-                    },
-                  ),
-                  items: [
-                    Assets.svg.firstOnboardingSVG,
-                    Assets.svg.secondOnboardingSVG,
-                    Assets.svg.thirdOnboardingSVG
-                  ].map((item) {
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: totalItems,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _current = index;
+                      showNextButton = _current <
+                          totalItems -
+                              1; // Show button on pages except the last one
+                    });
+                  },
+                  itemBuilder: (context, index) {
+                    String item = [
+                      Assets.svg.firstOnboardingSVG,
+                      Assets.svg.secondOnboardingSVG,
+                      Assets.svg.thirdOnboardingSVG
+                    ][index];
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
@@ -99,14 +78,14 @@ class _OnboardingCarruselState extends State<OnboardingCarrusel> {
                             ));
                       },
                     );
-                  }).toList(),
+                  },
                 ),
               ),
             ),
             ControlButton(
               current: _current,
               showNextButton: showNextButton,
-              controller: _controller,
+              pageController: _pageController,
               totalItems: totalItems,
             ),
           ],
