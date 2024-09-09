@@ -1,6 +1,5 @@
-
 import 'package:eshop/src/app/presentation/theme/color_theme.dart';
-import 'package:eshop/src/app/presentation/utils/consts.dart';
+import 'package:eshop/src/app/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatefulWidget {
@@ -17,8 +16,8 @@ class CustomButton extends StatefulWidget {
   final bool negativeColor;
   final Widget? icon2;
   final bool isOutlineButton;
-  final double? fontSize ;
-  final double? height ;
+  final double? fontSize;
+  final double? height;
 
   const CustomButton(
       {super.key,
@@ -34,7 +33,9 @@ class CustomButton extends StatefulWidget {
       this.negativeColor = false,
       this.icon2,
       this.isOutlineButton = false,
-      this.changeColor = false, this.fontSize, this.height});
+      this.changeColor = false,
+      this.fontSize,
+      this.height});
 
   @override
   State<CustomButton> createState() => _CustomButtonState();
@@ -110,13 +111,13 @@ class _CustomButtonState extends State<CustomButton> {
                             padding: const EdgeInsets.only(right: kPadding / 2),
                             child: widget.icon!,
                           ),
-                        Text(
-                          widget.text,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style:
-                             const TextStyle(fontWeight: FontWeight.w700, fontSize: 15, color: kPrimaryColor)
-                        ),
+                        Text(widget.text,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15,
+                                color: kPrimaryColor)),
                         if (widget.icon2 != null)
                           Padding(
                             padding: const EdgeInsets.only(left: kPadding),
@@ -127,20 +128,17 @@ class _CustomButtonState extends State<CustomButton> {
                   ),
           )
         : SizedBox(
-          width: widget.width ,
-          height: widget.height,
-          child: ElevatedButton(
-
+            width: widget.width,
+            height: widget.height,
+            child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.zero,
-              
                 backgroundColor:
                     widget.negativeColor ? kGreyButtonColor : kPrimaryColor,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(kRadius*2.5 ),
+                  borderRadius: BorderRadius.circular(kRadius * 2.5),
                 ),
               ),
-
               onPressed: onPressed,
               child: loading
                   ? const Center(
@@ -172,26 +170,25 @@ class _CustomButtonState extends State<CustomButton> {
                               ),
                             ),
                           )
-                        ]
-                        else ...[
+                        ] else ...[
                           if (widget.icon != null)
                             Padding(
-                              padding: const EdgeInsets.only(right: kPadding / 2),
+                              padding:
+                                  const EdgeInsets.only(right: kPadding / 2),
                               child: widget.icon!,
                             ),
-
                           Expanded(
                             child: Center(
-                              child: Text(
-                                widget.text,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                softWrap: true,
-                              style:   const TextStyle(fontWeight: FontWeight.w700, fontSize: 15, color: kWhiteColor)
-                              ),
+                              child: Text(widget.text,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 15,
+                                      color: kWhiteColor)),
                             ),
                           ),
-
                           if (widget.icon2 != null)
                             Padding(
                               padding: const EdgeInsets.only(left: kPadding),
@@ -201,6 +198,6 @@ class _CustomButtonState extends State<CustomButton> {
                       ],
                     ),
             ),
-        );
+          );
   }
 }

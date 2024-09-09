@@ -3,7 +3,7 @@
 import 'dart:developer';
 
 import 'package:eshop/src/app/presentation/routes/routes_navigator.dart';
-import 'package:eshop/src/app/presentation/screens/auth%20copy/log_in.dart';
+import 'package:eshop/src/app/presentation/screens/auth/log_in.dart';
 import 'package:eshop/src/app/presentation/screens/onboarding/onboarding_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';

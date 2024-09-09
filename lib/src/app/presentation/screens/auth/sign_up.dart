@@ -1,11 +1,14 @@
-import 'package:eshop/src/utils/app_text_styles.dart';
-import 'package:eshop/src/utils/constants.dart';
+import 'package:eshop/src/app/presentation/screens/auth/verification_screen/verification_screen.dart';
+import 'package:eshop/src/app/presentation/utils/app_text_styles.dart';
+import 'package:eshop/src/app/presentation/utils/constants.dart';
+import 'package:eshop/src/app/presentation/utils/custom_back_button.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
@@ -42,16 +45,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Form(
               key: _formKey,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: screenHeight * 0.05),
-                  Text(
-                    'Sign Up',
-                    style: AppTextStyles.titleTextStyle(screenWidth),
-                    textAlign: TextAlign.center,
+                  SizedBox(height: screenHeight * 0.03),
+                  Row(
+                    children: [
+                      CustomBackButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            'Sign Up',
+                            style: AppTextStyles.titleTextStyle(screenWidth),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                          width: 50), // Adjusted spacing for alignment
+                    ],
                   ),
                   SizedBox(height: screenHeight * 0.07),
-                  Align(
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'First Name',
@@ -80,7 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                   SizedBox(height: screenHeight * 0.02),
-                  Align(
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Last Name',
@@ -109,7 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                   SizedBox(height: screenHeight * 0.02),
-                  Align(
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Email',
@@ -145,7 +162,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                   SizedBox(height: screenHeight * 0.02),
-                  Align(
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Password',
@@ -200,7 +217,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       onPressed: () {
                         if (_formKey.currentState?.validate() == true) {
-                          // Proceed with sign-up
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const VerificationScreen(),
+                            ),
+                          );
                         }
                       },
                       child: const Text(
@@ -223,7 +245,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           height: 1.42,
                         ),
                       ),
-                      // Clickable "Sign In" text button in green
                       TextButton(
                         onPressed: () {
                           Navigator.pop(context);

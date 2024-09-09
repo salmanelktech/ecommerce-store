@@ -1,9 +1,9 @@
 import 'package:eshop/src/app/presentation/routes/routes_navigator.dart';
-import 'package:eshop/src/app/presentation/screens/auth%20copy/log_in.dart';
+import 'package:eshop/src/app/presentation/screens/auth/log_in.dart';
 import 'package:eshop/src/app/presentation/screens/onboarding/widgets/button.dart';
 import 'package:eshop/src/app/presentation/screens/onboarding/widgets/description.dart';
 import 'package:eshop/src/app/presentation/theme/color_theme.dart';
-import 'package:eshop/src/app/presentation/utils/consts.dart';
+import 'package:eshop/src/app/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

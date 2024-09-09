@@ -1,6 +1,6 @@
-import 'package:eshop/src/app/presentation/screens/auth%20copy/sign_up.dart';
-import 'package:eshop/src/utils/app_text_styles.dart';
-import 'package:eshop/src/utils/constants.dart';
+import 'package:eshop/src/app/presentation/screens/auth/sign_up.dart';
+import 'package:eshop/src/app/presentation/utils/app_text_styles.dart';
+import 'package:eshop/src/app/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 // SignInScreen
@@ -50,8 +50,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     style: AppTextStyles.titleTextStyle(screenWidth),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: screenHeight * 0.07),
-                  Align(
+                  SizedBox(height: screenHeight * 0.1),
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Email',
@@ -89,7 +89,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     },
                   ),
                   SizedBox(height: screenHeight * 0.02),
-                  Align(
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Password',
@@ -253,7 +253,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ],
                   ),
 
-                  SizedBox(height: screenHeight * 0.04),
+                  SizedBox(height: screenHeight * 0.1),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

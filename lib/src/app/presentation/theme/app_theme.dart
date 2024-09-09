@@ -1,6 +1,5 @@
-
 import 'package:eshop/src/app/presentation/theme/color_theme.dart';
-import 'package:eshop/src/app/presentation/utils/consts.dart';
+import 'package:eshop/src/app/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 enum DeviceSize {
@@ -11,24 +10,22 @@ enum DeviceSize {
 }
 
 class AppTheme {
-
   //* ------------------ Button Style ------------------
 
   static final buttonStyle = ButtonStyle(
-    padding: MaterialStateProperty.all(
+    padding: WidgetStateProperty.all(
       const EdgeInsets.symmetric(horizontal: kPadding * 3, vertical: kPadding),
     ),
-    elevation: MaterialStateProperty.all(0),
-    fixedSize: MaterialStateProperty.all(const Size(double.infinity, 50)),
-    shape: MaterialStateProperty.all(
+    elevation: WidgetStateProperty.all(0),
+    fixedSize: WidgetStateProperty.all(const Size(double.infinity, 50)),
+    shape: WidgetStateProperty.all(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(55),
       ),
     ),
   );
 
-  
-    //* ------------------ Light Theme ------------------
+  //* ------------------ Light Theme ------------------
 
   ThemeData light = ThemeData(
     appBarTheme: const AppBarTheme(
@@ -55,7 +52,6 @@ class AppTheme {
       background: kWhiteColor,
       onBackground: Colors.black,
     ),
-   
     elevatedButtonTheme: ElevatedButtonThemeData(style: buttonStyle),
     textButtonTheme: TextButtonThemeData(style: buttonStyle),
     outlinedButtonTheme: OutlinedButtonThemeData(style: buttonStyle),
@@ -185,11 +181,7 @@ class AppTheme {
       background: kDarkBackgroundColor,
       onBackground: kDarkGreyColor,
     ),
-    
-  
-      
-      
-       useMaterial3: true,
+    useMaterial3: true,
   );
 
   static isMobile({BuildContext? context}) {
