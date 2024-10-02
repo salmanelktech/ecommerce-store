@@ -1,21 +1,16 @@
 
-import 'package:eshop/src/app/presentation/screens/home/FiltersScreen.dart';
+import 'package:eshop/src/app/presentation/screens/home/filter_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../app_colors.dart';
 
-void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class PopularScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: PopularScreen(),
-    );
-  }
+  State<PopularScreen> createState() => _PopularScreenState();
 }
 
-class PopularScreen extends StatelessWidget {
+class _PopularScreenState extends State<PopularScreen> {
   final List<Product> products = [
     Product(name: 'Formal Shirt', price: 49, rating: 3.5, image: 'assets/images/sshirt.png'),
     Product(name: 'Thin Chair', price: 99, rating: 4.5,image: 'assets/images/chair.png'),

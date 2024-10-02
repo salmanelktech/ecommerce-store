@@ -1,6 +1,25 @@
+import 'package:eshop/src/app/presentation/screens/home/category_screen.dart';
 import 'package:eshop/src/app/presentation/screens/home/popular_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:eshop/app_colors.dart';
+
+import 'SearchBar.dart';
+
+final List<Map<String, dynamic>> dummyItems = [
+  {'name': 'Plastic table', 'category': 'Table'},
+  {'name': 'New office table', 'category': 'Table'},
+  {'name': 'Wooden reading table', 'category': 'Table'},
+  {'name': 'Dining table', 'category': 'Table'},
+  {'name': 'Low price table', 'category': 'Table'},
+  {'name': 'Leather sofa', 'category': 'Furniture'},
+  {'name': 'Wooden chair', 'category': 'Furniture'},
+  {'name': 'Bookshelf', 'category': 'Furniture'},
+  {'name': 'Coffee table', 'category': 'Furniture'},
+  {'name': 'Wardrobe', 'category': 'Almari'},
+  {'name': 'Closet', 'category': 'Almari'},
+  {'name': 'Storage cabinet', 'category': 'Almari'},
+];
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -15,6 +34,32 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int _selectedIndex = 0;
+
+
+  List<Map<String, dynamic>> _allItems = dummyItems;
+  List<Map<String, dynamic>> _displayedItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _displayedItems = _allItems;
+  }
+
+  void _handleSearch(String query) {
+    setState(() {
+      _displayedItems = _allItems.where((item) =>
+          item['name'].toLowerCase().contains(query.toLowerCase())).toList();
+    });
+  }
+
+  void _handleCategorySelection(String category) {
+    setState(() {
+      _displayedItems = category.isEmpty
+          ? _allItems
+          : _allItems.where((item) => item['category'] == category).toList();
+    });
+  }
+
 
   final List<Product> products = [
     Product(name: 'Face Mask', price: 15, rating: 3.5, image: 'assets/images/mask.png'),
@@ -92,38 +137,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Search Bar
                 Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          decoration: BoxDecoration(
-                            color: AppColors.gray07,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: "Search",
-                              border: InputBorder.none,
-                              icon: Icon(Icons.search,color: AppColors.gray04),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 10),
-
-                      Container(
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: AppColors.greenColor,
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: Icon(
-                          Icons.tune,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
+                  child: SearchBarWithDropdown(
+                    items: _allItems,
+                    onSearch: _handleSearch,
+                    onCategorySelected: _handleCategorySelection,
                   ),
                 ),
                 SizedBox(height: 10),
@@ -234,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
 
         child: Container(
-          height: screenHeight * 0.11,
+          height: screenHeight * 0.10,
           decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [
@@ -404,6 +421,13 @@ class _CategoryItemState extends State<CategoryItem> {
       onTap: () {
         setState(() {
           isTapped = !isTapped;
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CategoryScreen(),
+            ),
+          );
+
         });
       },
       child: Container(
@@ -539,6 +563,7 @@ class _ProductCardState extends State<ProductCard> {
                               padding: const EdgeInsets.all(10.0),
                               child: Image.asset(
                                 widget.product.image,
+                                height: 120,
                                 fit: BoxFit.contain,
                               ),
                             ),
