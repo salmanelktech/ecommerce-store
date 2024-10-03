@@ -186,7 +186,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ];
           },
           body: Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 0.0),
+            padding: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 10.0),
             child: GridView.builder(
               itemCount: products.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
