@@ -1,8 +1,10 @@
 
+import 'package:eshop/src/app/presentation/screens/home/cart.dart';
 import 'package:eshop/src/app/presentation/screens/home/filter_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../app_colors.dart';
+import 'product_details.dart';
 
 
 class PopularScreen extends StatefulWidget {
@@ -26,24 +28,41 @@ class _PopularScreenState extends State<PopularScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: Text('Popular'),
+          title: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              'Popular',
+              style: const TextStyle(
+                fontSize: 20,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
+                color: AppColors.gray01,
+              ),
+            ),
+          ),
         centerTitle: true,
         actions: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.all(10.0),
             child: IconButton(
-              icon: Icon(Icons.shopping_bag_outlined),
+              icon: const Icon(Icons.shopping_bag_outlined, color: AppColors.gray03),
               onPressed: () {
-
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CartScreen(),
+                  ),
+                );
               },
             ),
           ),
         ],
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        leading: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+            onPressed: () => Navigator.pop(context),
+          ),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -85,7 +104,7 @@ class _PopularScreenState extends State<PopularScreen> {
           ];
         },
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 20.0),
+          padding: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 10.0),
           child: GridView.builder(
             itemCount: products.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -176,8 +195,11 @@ class _ProductCardState extends State<ProductCard> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("${widget.product.name} clicked")),
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductDetailsPage(),
+          ),
         );
       },
       borderRadius: BorderRadius.circular(12),

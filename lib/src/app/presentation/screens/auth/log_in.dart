@@ -1,4 +1,5 @@
 import 'package:eshop/src/app/presentation/screens/auth/sign_up.dart';
+import 'package:eshop/src/app/presentation/screens/home/main_navigtaion_screen.dart';
 import 'package:eshop/src/app/presentation/utils/app_text_styles.dart';
 import 'package:eshop/src/app/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -160,7 +161,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         if (_formKey.currentState?.validate() == true) {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HomeScreen()),
+                            MaterialPageRoute(builder: (context) => MainScreen()),
                           );
                         }
                       },

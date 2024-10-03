@@ -1,5 +1,6 @@
 import 'package:eshop/src/app/presentation/screens/home/category_screen.dart';
 import 'package:eshop/src/app/presentation/screens/home/popular_screen.dart';
+import 'package:eshop/src/app/presentation/screens/home/product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:eshop/app_colors.dart';
 
@@ -99,6 +100,8 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -115,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+
 
                 // Title
                 Padding(
@@ -132,17 +135,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
 
                 // Search Bar
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: SearchBarWithDropdown(
-                    items: _allItems,
-                    onSearch: _handleSearch,
-                    onCategorySelected: _handleCategorySelection,
-                  ),
+                SearchBarWithDropdown(
+                  items: _allItems,
+                  onSearch: _handleSearch,
+                  onCategorySelected: _handleCategorySelection,
                 ),
+
                 SizedBox(height: 10),
 
                 // Categories Section
@@ -244,79 +245,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-        ),
-
-        child: Container(
-          height: screenHeight * 0.10,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 5.0,
-                spreadRadius: 1.0,
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                _buildIcon(Icons.grid_view, 0),
-                _buildIcon(Icons.shopping_bag, 1),
-                _buildIcon(Icons.notifications, 2),
-                _buildIcon(Icons.person, 3),
-              ],
-            ),
-          ),
-        ),
-      ),
-
     );
   }
 
 
-  // Function for Navigation icon
-  Widget _buildIcon(IconData icon, int index) {
-    bool isSelected = _selectedIndex == index;
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () {
-              _onItemTapped(index);
-            },
-            splashColor: AppColors.greenColor.withOpacity(0.3),
-            highlightColor: Colors.transparent,
-            borderRadius: BorderRadius.circular(18),
-            child: Ink(
-              decoration: BoxDecoration(
-                color: isSelected ? AppColors.greenColor.withOpacity(0.1) : Colors.transparent,
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(18),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
-                child: Icon(
-                  icon,
-                  color: isSelected ? AppColors.greenColor : Colors.grey,
-                ),
-              ),
-            ),
-          ),
-        ),
-        SizedBox(height: 4),
-      ],
-    );
-  }
 
   //Function for Last Product Listview Item
   Widget _buildProductMoreItem(String imagePath) {
@@ -519,8 +451,11 @@ class _ProductCardState extends State<ProductCard> {
 
     return InkWell(
       onTap: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("${widget.product.name} clicked")),
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductDetailsPage(),
+          ),
         );
       },
       borderRadius: BorderRadius.circular(12),
@@ -688,7 +623,12 @@ class _PopularProductCardState extends State<PopularProductCard> {
       width: cardWidth,
       child: InkWell(
         onTap: () {
-
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProductDetailsPage(),
+            ),
+          );
         },
         borderRadius: BorderRadius.circular(12),
         splashColor: Colors.green.withOpacity(0.2),
