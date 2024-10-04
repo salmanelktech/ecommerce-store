@@ -158,12 +158,15 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                       onPressed: () {
-                        if (_formKey.currentState?.validate() == true) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MainScreen()),
-                          );
-                        }
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MainScreen()),
+                        );
+
+                        // if (_formKey.currentState?.validate() == true) {
+                        //
+                        // }
                       },
                       child: const Text(
                         'Sign In',

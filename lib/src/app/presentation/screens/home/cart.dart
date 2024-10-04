@@ -1,3 +1,4 @@
+import 'package:eshop/src/app/presentation/screens/home/checkout_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../app_colors.dart';
@@ -309,13 +310,18 @@ class _CartScreenState extends State<CartScreen> {
 
             // Chcekout Button
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
               child: SizedBox(
                 width: double.infinity,
                 height: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    // checkout here
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CheckoutScreen(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.greenColor,

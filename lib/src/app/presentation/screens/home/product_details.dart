@@ -109,7 +109,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           padding: const EdgeInsets.all(20),
                           margin: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color: Colors.grey[100],
+                            color: AppColors.gray07,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Container(
@@ -302,7 +302,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
             // Add to Cart Button
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 16),
               child: SizedBox(
                 width: double.infinity,
                 height: 60,
