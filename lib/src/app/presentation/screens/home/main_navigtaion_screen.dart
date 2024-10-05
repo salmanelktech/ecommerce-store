@@ -1,10 +1,14 @@
 import 'package:eshop/src/app/presentation/screens/home/cart.dart';
 import 'package:eshop/src/app/presentation/screens/home/home_screen.dart';
+import 'package:eshop/src/app/presentation/screens/home/notification_screen.dart';
+import 'package:eshop/src/app/presentation/screens/home/reveiws_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../app_colors.dart';
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -13,10 +17,10 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    HomeScreen(),
-    CartScreen(),
+    const HomeScreen(),
+    const CartScreen(),
     NotificationsScreen(),
-    ProfileScreen(),
+    ReviewsScreen(),
   ];
 
   // for smooth transitions
@@ -39,7 +43,7 @@ class _MainScreenState extends State<MainScreen> {
       _selectedIndex = index;
       _pageController.animateToPage(
         index,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     });
@@ -57,7 +61,7 @@ class _MainScreenState extends State<MainScreen> {
             _selectedIndex = index;
           });
         },
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         children: _screens,
       ),
       bottomNavigationBar: Theme(
@@ -74,11 +78,10 @@ class _MainScreenState extends State<MainScreen> {
           color: Colors.black.withOpacity(0.1),
           spreadRadius: 0.5,
           blurRadius: 5,
-          offset: Offset(0, 2),
+          offset: const Offset(0, 2),
         )],
           ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          child: SafeArea(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
@@ -117,7 +120,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 25,
+                    horizontal: 20,
                     vertical: 12
                 ),
                 child: Icon(
@@ -128,32 +131,19 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         ),
-        SizedBox(height: 4),
       ],
     );
   }
 }
 
-
-
-class NotificationsScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Center(
-        child: Text('Notifications Screen'),
-      ),
-    );
-  }
-}
-
 class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Center(
+      child: const Center(
         child: Text('Profile Screen'),
       ),
     );

@@ -23,7 +23,7 @@ class _SearchBarWithDropdownState extends State<SearchBarWithDropdown> {
   String _selectedCategory = '';
   List<String> _categories = [];
   List<Map<String, dynamic>> _filteredItems = [];
-  FocusNode _focusNode = FocusNode();
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -80,14 +80,14 @@ class _SearchBarWithDropdownState extends State<SearchBarWithDropdown> {
               children: [
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     decoration: BoxDecoration(
                       color: AppColors.gray07,
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: TextField(
                       focusNode: _focusNode,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: "Search",
                         border: InputBorder.none,
                         icon: Icon(Icons.search, color: AppColors.gray04),
@@ -108,14 +108,14 @@ class _SearchBarWithDropdownState extends State<SearchBarWithDropdown> {
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Container(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: AppColors.greenColor,
                     borderRadius: BorderRadius.circular(50),
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.tune,
                     color: Colors.white,
                   ),
@@ -125,7 +125,7 @@ class _SearchBarWithDropdownState extends State<SearchBarWithDropdown> {
           ),
           if (_showDropdown)
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -134,7 +134,7 @@ class _SearchBarWithDropdownState extends State<SearchBarWithDropdown> {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 1,
                     blurRadius: 7,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -159,7 +159,7 @@ class _SearchBarWithDropdownState extends State<SearchBarWithDropdown> {
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
-                              side: BorderSide(color: Colors.transparent),
+                              side: const BorderSide(color: Colors.transparent),
                             ),
                             backgroundColor: AppColors.gray06,
                             selectedColor: AppColors.greenColor,
@@ -174,15 +174,15 @@ class _SearchBarWithDropdownState extends State<SearchBarWithDropdown> {
                   ..._filteredItems.take(5).map((item) {
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                      child: Container(
+                      child: SizedBox(
                         height: 30,
                         child: ListTile(
                           dense: true,
-                          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-                          leading: Icon(Icons.close, size: 18, color: AppColors.gray04),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                          leading: const Icon(Icons.close, size: 18, color: AppColors.gray04),
                           title: Text(
                             item['name'],
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: 'Poppins',
                                 fontSize: 12,
                                 color: AppColors.gray04

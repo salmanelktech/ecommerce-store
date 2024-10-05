@@ -3,8 +3,9 @@ import 'package:eshop/src/app/presentation/screens/home/main_navigtaion_screen.d
 import 'package:eshop/src/app/presentation/utils/app_text_styles.dart';
 import 'package:eshop/src/app/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:eshop/app_colors.dart';
 
-import '../home/home_screen.dart';
+
 
 // SignInScreen
 class SignInScreen extends StatefulWidget {
@@ -37,7 +38,7 @@ class _SignInScreenState extends State<SignInScreen> {
     var screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -71,15 +72,15 @@ class _SignInScreenState extends State<SignInScreen> {
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: 16),
                       filled: true,
-                      fillColor: AppColors.inputFillColor,
+                      fillColor: AppColors.gray07,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
                       ),
-                      errorStyle: const TextStyle(color: AppColors.errorColor),
+                      errorStyle: const TextStyle(color: AppColors.error),
                       suffixIcon: _isEmailValid
                           ? const Icon(Icons.check_circle,
-                              color: AppColors.primaryColor)
+                              color: AppColors.greenColor)
                           : null,
                     ),
                     validator: (value) {
@@ -108,12 +109,12 @@ class _SignInScreenState extends State<SignInScreen> {
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: 16),
                       filled: true,
-                      fillColor: AppColors.inputFillColor,
+                      fillColor: AppColors.gray07,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
                       ),
-                      errorStyle: const TextStyle(color: AppColors.errorColor),
+                      errorStyle: const TextStyle(color: AppColors.error),
                       suffixIcon: IconButton(
                         icon: Icon(
                           _isPasswordVisible
@@ -148,11 +149,11 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   SizedBox(height: screenHeight * 0.04),
                   SizedBox(
-                    width: screenWidth * 0.8,
+                    width: screenWidth * 0.9,
                     height: 56,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryColor,
+                        backgroundColor: AppColors.greenColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -179,7 +180,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     children: [
                       Expanded(
                         child: Divider(
-                          color: AppColors.inputFillColor, // updated color
+                          color: AppColors.gray07, // updated color
                         ),
                       ),
                       Padding(
@@ -191,7 +192,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       Expanded(
                         child: Divider(
-                          color: AppColors.inputFillColor, // updated color
+                          color: AppColors.gray07, // updated color
                         ),
                       ),
                     ],
@@ -209,7 +210,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             color: Colors.transparent,
                             border: Border.all(
                               color: AppColors
-                                  .inputFillColor, // Change to grey color
+                                  .gray07, // Change to grey color
                               width: 1,
                             ),
                             borderRadius: BorderRadius.circular(10),
@@ -218,7 +219,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(Icons.facebook,
-                                  color: AppColors.facebookColor),
+                                  color: Colors.blue),
                               SizedBox(width: 8),
                               Text(
                                 'Facebook',
@@ -237,7 +238,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             color: Colors.transparent,
                             border: Border.all(
                               color: AppColors
-                                  .inputFillColor, // Change to grey color
+                                  .gray07, // Change to grey color
                               width: 1,
                             ),
                             borderRadius: BorderRadius.circular(10),
@@ -297,7 +298,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             fontFamily: 'Poppins',
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
-                            color: AppColors.primaryColor, // Green color
+                            color: AppColors.greenColor, // Green color
                             height: 1.42,
                           ),
                         ),

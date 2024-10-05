@@ -34,7 +34,7 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF1B4B66)),
+          icon: const Icon(Icons.arrow_back, color: AppColors.gray03),
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
@@ -93,7 +93,7 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
 
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
               ),
               child: SafeArea(
@@ -334,7 +334,6 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
 
   void _submitForm() {
     if (_formKey.currentState?.validate() ?? false) {
-      print('Form is valid');
     }
   }
 }

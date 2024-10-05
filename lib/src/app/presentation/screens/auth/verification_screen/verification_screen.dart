@@ -6,6 +6,8 @@ import 'package:eshop/src/app/presentation/utils/custom_back_button.dart';
 import 'package:eshop/src/app/presentation/utils/custom_button.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../../app_colors.dart';
+
 class VerificationScreen extends StatefulWidget {
   const VerificationScreen({super.key});
 
@@ -26,7 +28,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
     final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -71,7 +73,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   height: 1.42,
-                  color: AppColors.greyShade700,
+                  color: AppColors.gray03,
                 ),
               ),
               const SizedBox(height: 40),
@@ -92,7 +94,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   fontFamily: 'Poppins',
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  color: AppColors.greyShade700,
+                  color: AppColors.gray03,
                 ),
               ),
               const SizedBox(height: 8),
@@ -105,7 +107,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     fontFamily: 'Poppins',
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: AppColors.primaryColor,
+                    color: AppColors.greenColor,
                   ),
                 ),
               ),
@@ -145,7 +147,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w500,
-              color: AppColors.greyShade700,
+              color: AppColors.gray03,
             ),
             maxLength: 1,
             decoration: const InputDecoration(
@@ -162,7 +164,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
           ),
           Container(
             height: 2,
-            color: AppColors.greyShade700,
+            color: AppColors.gray03,
           ),
         ],
       ),

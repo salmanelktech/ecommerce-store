@@ -1,6 +1,8 @@
 import 'package:eshop/src/app/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../app_colors.dart';
+
 class CustomBackButton extends StatelessWidget {
   final VoidCallback onPressed;
 
@@ -13,7 +15,7 @@ class CustomBackButton extends StatelessWidget {
       child: IconButton(
         icon: const Icon(
           Icons.arrow_back_ios,
-          color: AppColors.greyShade700,
+          color: AppColors.gray03,
         ),
         onPressed: onPressed,
       ),

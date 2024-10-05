@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../app_colors.dart';
 import 'constants.dart'; // Ensure you import your constants
 
 class AppTextStyles {
@@ -10,7 +11,7 @@ class AppTextStyles {
       fontWeight: FontWeight.w500,
       height: 1.1,
       letterSpacing: 0.2,
-      color: AppColors.greyShade700, // Ensure your custom color is applied
+      color: AppColors.gray03, // Ensure your custom color is applied
     );
   }
 

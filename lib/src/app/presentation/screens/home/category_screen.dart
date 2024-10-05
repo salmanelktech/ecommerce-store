@@ -1,8 +1,9 @@
 import 'package:eshop/app_colors.dart';
 import 'package:eshop/src/app/presentation/screens/home/product_details.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'SearchBar.dart';
+import 'Searchbar.dart';
 
 final List<Map<String, dynamic>> dummyItems = [
   {'name': 'Plastic table', 'category': 'Table'},
@@ -21,6 +22,8 @@ final List<Map<String, dynamic>> dummyItems = [
 
 
 class CategoryScreen extends StatefulWidget {
+  const CategoryScreen({super.key});
+
 
   @override
   State<CategoryScreen> createState() => _CategoryScreenState();
@@ -32,27 +35,20 @@ class _CategoryScreenState extends State<CategoryScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 
-  List<Map<String, dynamic>> _allItems = dummyItems;
-  List<Map<String, dynamic>> _displayedItems = [];
+  final List<Map<String, dynamic>> _allItems = dummyItems;
 
   @override
   void initState() {
     super.initState();
-    _displayedItems = _allItems;
   }
 
   void _handleSearch(String query) {
     setState(() {
-      _displayedItems = _allItems.where((item) =>
-          item['name'].toLowerCase().contains(query.toLowerCase())).toList();
     });
   }
 
   void _handleCategorySelection(String category) {
     setState(() {
-      _displayedItems = category.isEmpty
-          ? _allItems
-          : _allItems.where((item) => item['category'] == category).toList();
     });
   }
 
@@ -78,28 +74,28 @@ class _CategoryScreenState extends State<CategoryScreen> {
             return <Widget>[
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IconButton(
-                            icon: Icon(Icons.menu),
+                            icon: const Icon(Icons.menu),
                             onPressed: () {
                               _scaffoldKey.currentState?.openDrawer();
                             },
                           ),
-                          CircleAvatar(
+                          const CircleAvatar(
                             backgroundImage: NetworkImage(
                               'https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg',
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
                       SearchBarWithDropdown(
                         items: _allItems,
@@ -107,70 +103,66 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         onCategorySelected: _handleCategorySelection,
                       ),
 
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
                       Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              child: Row(
-                                children: [
+                            Row(
+                              children: [
 
-                                  Text(
-                                    "Category: ",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: 'Poppins',
-                                      color: AppColors.gray04,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
+                                const Text(
+                                  "Category: ",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: 'Poppins',
+                                    color: AppColors.gray04,
+                                    fontWeight: FontWeight.w500,
                                   ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
 
-                                  SizedBox(width: 10),
+                                const SizedBox(width: 10),
 
-                                  Text(
-                                    category,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: 'Poppins',
-                                      color: AppColors.greenColor,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
+                                Text(
+                                  category,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: 'Poppins',
+                                    color: AppColors.greenColor,
+                                    fontWeight: FontWeight.w500,
                                   ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
 
-                                ],
-                              ),
+                              ],
                             ),
 
-                            Container(
-                              child: Row(
-                                children: [
-                                  Text(
-                                    itemcount.toString() + " items",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: 'Poppins',
-                                      color: AppColors.gray02,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
+                            Row(
+                              children: [
+                                Text(
+                                  "$itemcount items",
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: 'Poppins',
+                                    color: AppColors.gray02,
+                                    fontWeight: FontWeight.w500,
                                   ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
 
-                                  SizedBox(width: 10),
+                                const SizedBox(width: 10),
 
-                                  Icon(
-                                    Icons.dashboard,
-                                    color: AppColors.gray01,
-                                  )
-                                ],
-                              ),
+                                const Icon(
+                                  Icons.dashboard,
+                                  color: AppColors.gray01,
+                                )
+                              ],
                             )
                           ],
                         ),
@@ -209,176 +201,230 @@ class _CategoryScreenState extends State<CategoryScreen> {
 class ProductCard extends StatefulWidget {
   final Product product;
 
-  ProductCard({required this.product});
+  const ProductCard({super.key, required this.product});
 
   @override
   _ProductCardState createState() => _ProductCardState();
 }
 
-class _ProductCardState extends State<ProductCard> {
+class _ProductCardState extends State<ProductCard> with SingleTickerProviderStateMixin {
   bool isFavorite = false;
+
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _handleTapDown(TapDownDetails details) {
+    _controller.forward();
+  }
+
+  void _handleTapUp(TapUpDetails details) {
+    Future.delayed(const Duration(milliseconds: 100), () {
+      _controller.reverse();
+    });
+
+    Future.delayed(const Duration(milliseconds: 100), () {
+      Navigator.push(
+        context,
+        CupertinoPageRoute(
+          builder: (context) => const ProductDetailsPage(),
+        ),
+      );
+    });
+  }
+
+  void _handleTapCancel() {
+    _controller.reverse();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ProductDetailsPage(),
-          ),
-        );
-      },
-      borderRadius: BorderRadius.circular(12),
-      splashColor: Colors.green.withOpacity(0.2),
-      child: Ink(
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              spreadRadius: 0.5,
-              blurRadius: 5,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Flexible(
-                child: Stack(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: AppColors.gray07,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Image.asset(
-                              widget.product.image,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 10,
-                      right: 10,
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isFavorite = !isFavorite;
-                          });
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(isFavorite
-                                  ? "Added to Favorites"
-                                  : "Removed from Favorites"),
-                            ),
-                          );
-                        },
-                        borderRadius: BorderRadius.circular(20),
-                        splashColor: Colors.red.withOpacity(0.2),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Icon(
-                            Icons.favorite,
-                            color: isFavorite
-                                ? Colors.red
-                                : AppColors.gray04,
-                            size: 20,
-                          ),
-                        ),
-                      ),
+
+
+    return GestureDetector(
+      onTapDown: _handleTapDown,
+      onTapUp: _handleTapUp,
+      onTapCancel: _handleTapCancel,
+      child: AnimatedBuilder(
+        animation: _scaleAnimation,
+        builder: (context, child) {
+          return Transform.scale(
+            scale: _scaleAnimation.value,
+            child: Container(
+              margin: const EdgeInsets.all(5),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      spreadRadius: 0.5,
+                      blurRadius: 5,
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
-              ),
-              SizedBox(height: 5),
-              Row(
-                children: [
-                  Icon(
-                    Icons.star,
-                    color: AppColors.alert,
-                    size: 20,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: AppColors.gray07,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Image.asset(
+                                      widget.product.image,
+                                      width: 110,
+                                      height: 128,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 10,
+                              right: 10,
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isFavorite = !isFavorite;
+                                  });
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(isFavorite
+                                          ? "Added to Favorites"
+                                          : "Removed from Favorites"),
+                                    ),
+                                  );
+                                },
+                                borderRadius: BorderRadius.circular(20),
+                                splashColor: Colors.red.withOpacity(0.2),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Icon(
+                                    Icons.favorite,
+                                    color: isFavorite
+                                        ? Colors.red
+                                        : AppColors.gray04,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.star,
+                            color: AppColors.alert,
+                            size: 20,
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            widget.product.rating.toString(),
+                            style: const TextStyle(
+                              fontSize: 9,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.gray03,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 3),
+                      Text(
+                        widget.product.name,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.gray01,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 5),
+                      Row(
+                        children: [
+                          Text(
+                            '\$${widget.product.price}',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.greenColor,
+                            ),
+                          ),
+                          const Spacer(),
+                          InkWell(
+                            onTap: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text("Added to cart")),
+                              );
+                            },
+                            borderRadius: BorderRadius.circular(50),
+                            splashColor: Colors.green.withOpacity(0.2),
+                            child: Container(
+                              width: 20,
+                              height: 20,
+                              decoration: const BoxDecoration(
+                                color: Colors.green,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                                size: 15,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  SizedBox(width: 5),
-                  Text(
-                    widget.product.rating.toString(),
-                    style: TextStyle(
-                      fontSize: 9,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.gray03,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 3),
-              Text(
-                widget.product.name,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.gray01,
                 ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(height: 5),
-              Row(
-                children: [
-                  Text(
-                    '\$' + widget.product.price.toString(),
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.greenColor,
-                    ),
-                  ),
-                  Spacer(),
-                  InkWell(
-                    onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Added to cart")),
-                      );
-                    },
-                    borderRadius: BorderRadius.circular(50),
-                    splashColor: Colors.green.withOpacity(0.2),
-                    child: Container(
-                      width: 20,
-                      height: 20,
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 15,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
+
+
   }
 }
 

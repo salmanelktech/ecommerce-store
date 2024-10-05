@@ -1,10 +1,12 @@
 import 'package:eshop/src/app/presentation/screens/home/add_card.dart';
+import 'package:eshop/src/app/presentation/screens/home/order_stats.dart';
+import 'package:eshop/src/app/presentation/screens/home/payment_success.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../app_colors.dart';
 import 'cart.dart';
 
-// Data Models
 class ShippingAddress {
   final String id;
   final String title;
@@ -102,41 +104,32 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Text(
-            'Checkout',
-            style: const TextStyle(
-              fontSize: 20,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
-              color: AppColors.gray01,
-            ),
+        title: Text(
+          'Checkout',
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.bold,
+            color: AppColors.gray01,
           ),
         ),
         centerTitle: true,
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: IconButton(
-              icon: const Icon(Icons.shopping_bag_outlined, color: AppColors.gray03),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CartScreen(),
-                  ),
-                );
-              },
-            ),
+          IconButton(
+            icon: const Icon(Icons.shopping_bag_outlined, color: AppColors.gray03),
+            onPressed: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => const CartScreen(),
+                ),
+              );
+            },
           ),
         ],
-        leading: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-            onPressed: () => Navigator.pop(context),
-          ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: AppColors.gray03),
+          onPressed: () => Navigator.pop(context),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -186,7 +179,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   separatorBuilder: (context, index) => const SizedBox(height: 16),
                   itemBuilder: (context, index) {
                     final address = addresses[index];
-                    return _buildAddressCard(
+                    return buildAddressCard(
                       address: address,
                       isSelected: selectedAddressId == address.id,
                       onSelected: (value) {
@@ -215,8 +208,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => AddCreditCardScreen(),
+                          CupertinoPageRoute(
+                            builder: (context) => const AddCreditCardScreen(),
                           ),
                         );
                       },
@@ -242,7 +235,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   separatorBuilder: (context, index) => const SizedBox(height: 12),
                   itemBuilder: (context, index) {
                     final paymentMethod = paymentMethods[index];
-                    return _buildPaymentCard(
+                    return buildPaymentCard(
                       paymentMethod: paymentMethod,
                       isSelected: selectedPaymentMethodId == paymentMethod.id,
                       onSelected: (value) {
@@ -278,7 +271,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   width: double.infinity,
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => OrderTrackingScreen(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.greenColor,
                       shape: RoundedRectangleBorder(
@@ -304,125 +304,129 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
-  Widget _buildAddressCard({
+  Widget buildAddressCard({
     required ShippingAddress address,
     required bool isSelected,
     required Function(bool?) onSelected,
   }) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            spreadRadius: 0.5,
-            blurRadius: 5,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Radio(
-            value: true,
-            groupValue: isSelected,
-            onChanged: onSelected,
-            activeColor: AppColors.greenColor,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  address.title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.gray01,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  address.address,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.normal,
-                    color: AppColors.gray04,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Mobile: ${address.phone}',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.gray02,
-                  ),
-                ),
-              ],
+    return _ZoomWrapper(
+      onTap: () => onSelected(true),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 0.5,
+              blurRadius: 5,
+              offset: const Offset(0, 2),
             ),
-          ),
-          IconButton(
-            icon: const Icon(Icons.more_vert),
-            onPressed: () {},
-          ),
-        ],
+          ],
+        ),
+        child: Row(
+          children: [
+            Radio(
+              value: true,
+              groupValue: isSelected,
+              onChanged: onSelected,
+              activeColor: AppColors.greenColor,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    address.title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.gray01,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    address.address,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.normal,
+                      color: AppColors.gray04,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Mobile: ${address.phone}',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.gray02,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.more_vert),
+              onPressed: () {},
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildPaymentCard({
+  Widget buildPaymentCard({
     required PaymentMethod paymentMethod,
     required bool isSelected,
     required Function(bool?) onSelected,
   }) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            spreadRadius: 0.5,
-            blurRadius: 5,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Image.asset(
-            'assets/images/${paymentMethod.cardType}.png',
-            height: 30,
-            width: 50,
-          ),
-          const SizedBox(width: 16),
-          Text(
-            '**** **** *${paymentMethod.lastFourDigits}',
-              style: TextStyle(
+    return _ZoomWrapper(
+      onTap: () => onSelected(true),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 0.5,
+              blurRadius: 5,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(
+              'assets/images/${paymentMethod.cardType}.png',
+              height: 30,
+              width: 50,
+            ),
+            const SizedBox(width: 16),
+            Text(
+              '**** **** *${paymentMethod.lastFourDigits}',
+              style: const TextStyle(
                 fontSize: 14,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
                 color: AppColors.gray02,
               ),
-          ),
-
-          Spacer(),
-
-          Radio(
-            value: true,
-            groupValue: isSelected,
-            onChanged: onSelected,
-            activeColor: AppColors.greenColor,
-          ),
-        ],
+            ),
+            const Spacer(),
+            Radio(
+              value: true,
+              groupValue: isSelected,
+              onChanged: onSelected,
+              activeColor: AppColors.greenColor,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -450,6 +454,74 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ZoomWrapper extends StatefulWidget {
+  final Widget child;
+  final VoidCallback onTap;
+
+  const _ZoomWrapper({
+    required this.child,
+    required this.onTap,
+  });
+
+  @override
+  State<_ZoomWrapper> createState() => _ZoomWrapperState();
+}
+
+class _ZoomWrapperState extends State<_ZoomWrapper>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 150),
+      lowerBound: 0.0,
+      upperBound: 0.1,
+    )..addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _onTapDown(TapDownDetails details) {
+    _controller.forward();
+  }
+
+  void _onTapUp(TapUpDetails details) {
+    Future.delayed(const Duration(milliseconds: 100), () {
+      _controller.reverse();
+    });
+
+    Future.delayed(const Duration(milliseconds: 100), () {
+    });
+  }
+
+  void _onTapCancel() {
+    _controller.reverse();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTapDown: _onTapDown,
+      onTapUp: _onTapUp,
+      onTapCancel: _onTapCancel,
+      onTap: widget.onTap,
+      child: Transform.scale(
+        scale: 1 - _controller.value,
+        child: widget.child,
+      ),
     );
   }
 }

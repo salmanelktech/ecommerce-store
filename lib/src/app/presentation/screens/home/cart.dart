@@ -1,4 +1,5 @@
 import 'package:eshop/src/app/presentation/screens/home/checkout_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../app_colors.dart';
@@ -69,32 +70,23 @@ class _CartScreenState extends State<CartScreen> {
       appBar: AppBar(
         centerTitle: true,
         surfaceTintColor: Colors.white,
-        leading: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-            onPressed: () => Navigator.pop(context),
-          ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: AppColors.gray03),
+          onPressed: () => Navigator.pop(context),
         ),
-        title: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Text(
-            'Cart',
-            style: const TextStyle(
-              fontSize: 20,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
-              color: AppColors.gray01,
-            ),
+        title: Text(
+          'Cart',
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.bold,
+            color: AppColors.gray01,
           ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: IconButton(
-              icon: const Icon(Icons.shopping_bag_outlined, color: AppColors.gray03),
-              onPressed: () {},
-            ),
+          IconButton(
+            icon: const Icon(Icons.shopping_bag_outlined, color: AppColors.gray03),
+            onPressed: () {},
           ),
         ],
         backgroundColor: Colors.white,
@@ -120,7 +112,7 @@ class _CartScreenState extends State<CartScreen> {
                           color: Colors.black.withOpacity(0.1),
                           spreadRadius: 0.5,
                           blurRadius: 5,
-                          offset: Offset(0, 2),
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),
@@ -136,6 +128,8 @@ class _CartScreenState extends State<CartScreen> {
                           padding: const EdgeInsets.all(8),
                           child: Center(
                             child: Image.asset(
+                              height: 60,
+                              width: 50,
                               item.image,
                               fit: BoxFit.contain,
                             ),
@@ -174,59 +168,57 @@ class _CartScreenState extends State<CartScreen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
-                                    child: Row(
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            if (item.quantity > 1) {
-                                              setState(() => item.quantity--);
-                                            }
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(5),
-                                                color: AppColors.gray05),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(3.0),
-                                              child: Icon(
-                                                Icons.remove,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
+                                  Row(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          if (item.quantity > 1) {
+                                            setState(() => item.quantity--);
+                                          }
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(5),
+                                              color: AppColors.gray05),
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(3.0),
+                                            child: Icon(
+                                              Icons.remove,
+                                              color: Colors.white,
+                                              size: 20,
                                             ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Text(
-                                            '${item.quantity}',
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Text(
+                                          '${item.quantity}',
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() => item.quantity++);
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(5),
+                                              color: AppColors.gray03),
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(3.0),
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                              size: 20,
                                             ),
                                           ),
                                         ),
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() => item.quantity++);
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(5),
-                                                color: AppColors.gray03),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(3.0),
-                                              child: Icon(
-                                                Icons.add,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
 
                                   Text(
@@ -262,7 +254,7 @@ class _CartScreenState extends State<CartScreen> {
                       color: Colors.black.withOpacity(0.1),
                       spreadRadius: 0.5,
                       blurRadius: 5,
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
@@ -318,8 +310,8 @@ class _CartScreenState extends State<CartScreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => CheckoutScreen(),
+                      CupertinoPageRoute(
+                        builder: (context) => const CheckoutScreen(),
                       ),
                     );
                   },

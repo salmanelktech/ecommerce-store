@@ -4,6 +4,8 @@ import 'package:eshop/src/app/presentation/utils/constants.dart';
 import 'package:eshop/src/app/presentation/utils/custom_back_button.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../app_colors.dart';
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -37,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     var screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -83,7 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: 16),
                       filled: true,
-                      fillColor: AppColors.inputFillColor,
+                      fillColor: AppColors.gray07,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
@@ -112,7 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: 16),
                       filled: true,
-                      fillColor: AppColors.inputFillColor,
+                      fillColor: AppColors.gray07,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
@@ -142,14 +144,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: 16),
                       filled: true,
-                      fillColor: AppColors.inputFillColor,
+                      fillColor: AppColors.gray07,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
                       ),
                       suffixIcon: _isEmailValid
                           ? const Icon(Icons.check_circle,
-                              color: AppColors.primaryColor)
+                              color: AppColors.greenColor)
                           : null,
                     ),
                     validator: (value) {
@@ -177,7 +179,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: 16),
                       filled: true,
-                      fillColor: AppColors.inputFillColor,
+                      fillColor: AppColors.gray07,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
@@ -210,7 +212,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 56,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryColor,
+                        backgroundColor: AppColors.greenColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
