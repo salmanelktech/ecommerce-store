@@ -1,6 +1,7 @@
 
 import 'package:eshop/src/app/presentation/screens/home/cart.dart';
 import 'package:eshop/src/app/presentation/screens/home/filter_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../app_colors.dart';
@@ -8,6 +9,8 @@ import 'product_details.dart';
 
 
 class PopularScreen extends StatefulWidget {
+  const PopularScreen({super.key});
+
   @override
   State<PopularScreen> createState() => _PopularScreenState();
 }
@@ -28,11 +31,11 @@ class _PopularScreenState extends State<PopularScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-          title: Padding(
-            padding: const EdgeInsets.all(10.0),
+          title: const Padding(
+            padding: EdgeInsets.all(10.0),
             child: Text(
               'Popular',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
@@ -49,8 +52,8 @@ class _PopularScreenState extends State<PopularScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => CartScreen(),
+                  CupertinoPageRoute(
+                    builder: (context) => const CartScreen(),
                   ),
                 );
               },
@@ -70,7 +73,7 @@ class _PopularScreenState extends State<PopularScreen> {
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
@@ -81,14 +84,14 @@ class _PopularScreenState extends State<PopularScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: EdgeInsets.all(10.0),
                           child: FilterSortButton(
                             icon: Icons.sort,
                             text: 'Sort',
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: EdgeInsets.all(10.0),
                           child: FilterSortButton(
                             icon: Icons.filter_list,
                             text: 'Filter',
@@ -127,7 +130,7 @@ class FilterSortButton extends StatelessWidget {
   final IconData icon;
   final String text;
 
-  FilterSortButton({required this.icon, required this.text});
+  const FilterSortButton({super.key, required this.icon, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -135,8 +138,8 @@ class FilterSortButton extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) =>  FiltersScreen(),
+          CupertinoPageRoute(
+            builder: (context) =>  const FiltersScreen(),
           ),
         );
       },
@@ -152,7 +155,7 @@ class FilterSortButton extends StatelessWidget {
               color: Colors.black.withOpacity(0.1),
               spreadRadius: 0.5,
               blurRadius: 5,
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
             ),
           ],
         ),
@@ -164,10 +167,10 @@ class FilterSortButton extends StatelessWidget {
                 icon,
                 color: Colors.black,
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text(
                 text,
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
               ),
             ],
           ),
@@ -182,7 +185,7 @@ class FilterSortButton extends StatelessWidget {
 class ProductCard extends StatefulWidget {
   final Product product;
 
-  ProductCard({required this.product});
+  const ProductCard({super.key, required this.product});
 
   @override
   _ProductCardState createState() => _ProductCardState();
@@ -197,8 +200,8 @@ class _ProductCardState extends State<ProductCard> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => ProductDetailsPage(),
+          CupertinoPageRoute(
+            builder: (context) => const ProductDetailsPage(),
           ),
         );
       },
@@ -213,7 +216,7 @@ class _ProductCardState extends State<ProductCard> {
               color: Colors.black.withOpacity(0.1),
               spreadRadius: 0.5,
               blurRadius: 5,
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
             ),
           ],
         ),
@@ -278,18 +281,18 @@ class _ProductCardState extends State<ProductCard> {
                   ],
                 ),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.star,
                     color: AppColors.alert,
                     size: 20,
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   Text(
                     widget.product.rating.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 9,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w400,
@@ -298,10 +301,10 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                 ],
               ),
-              SizedBox(height: 3),
+              const SizedBox(height: 3),
               Text(
                 widget.product.name,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.w600,
@@ -310,23 +313,23 @@ class _ProductCardState extends State<ProductCard> {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Row(
                 children: [
                   Text(
-                    '\$' + widget.product.price.toString(),
-                    style: TextStyle(
+                    '\$${widget.product.price}',
+                    style: const TextStyle(
                       fontSize: 12,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500,
                       color: AppColors.greenColor,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   InkWell(
                     onTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Added to cart")),
+                        const SnackBar(content: Text("Added to cart")),
                       );
                     },
                     borderRadius: BorderRadius.circular(50),
@@ -334,11 +337,11 @@ class _ProductCardState extends State<ProductCard> {
                     child: Container(
                       width: 20,
                       height: 20,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.green,
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.add,
                         color: Colors.white,
                         size: 15,

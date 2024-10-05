@@ -1,10 +1,11 @@
 import 'package:eshop/src/app/presentation/screens/home/category_screen.dart';
 import 'package:eshop/src/app/presentation/screens/home/popular_screen.dart';
 import 'package:eshop/src/app/presentation/screens/home/product_details.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:eshop/app_colors.dart';
 
-import 'SearchBar.dart';
+import 'Searchbar.dart';
 
 final List<Map<String, dynamic>> dummyItems = [
   {'name': 'Plastic table', 'category': 'Table'},
@@ -34,30 +35,22 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  int _selectedIndex = 0;
 
 
-  List<Map<String, dynamic>> _allItems = dummyItems;
-  List<Map<String, dynamic>> _displayedItems = [];
+  final List<Map<String, dynamic>> _allItems = dummyItems;
 
   @override
   void initState() {
     super.initState();
-    _displayedItems = _allItems;
   }
 
   void _handleSearch(String query) {
     setState(() {
-      _displayedItems = _allItems.where((item) =>
-          item['name'].toLowerCase().contains(query.toLowerCase())).toList();
     });
   }
 
   void _handleCategorySelection(String category) {
     setState(() {
-      _displayedItems = category.isEmpty
-          ? _allItems
-          : _allItems.where((item) => item['category'] == category).toList();
     });
   }
 
@@ -76,173 +69,156 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery
-        .of(context)
-        .size
-        .height;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
       backgroundColor: AppColors.white,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    IconButton(
-                      icon: Icon(Icons.menu),
-                      onPressed: () {
-                        _scaffoldKey.currentState?.openDrawer();
-                      },
-                    ),
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        'https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg',
-                      ),
-                    ),
-                  ],
-                ),
-
-
-                // Title
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
-                    "Find your favourite Product",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: 'Poppins',
-                      color: AppColors.gray01,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                SizedBox(height: 10),
-
-                // Search Bar
-                SearchBarWithDropdown(
-                  items: _allItems,
-                  onSearch: _handleSearch,
-                  onCategorySelected: _handleCategorySelection,
-                ),
-
-                SizedBox(height: 10),
-
-                // Categories Section
-                Container(
-                  height: screenHeight * 0.14,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    children: [
-                      CategoryItem(categoryName: 'Cloths', imagePath: 'assets/images/dress.png',),
-                      CategoryItem(categoryName: 'Furniture', imagePath: 'assets/images/sofa.png',),
-                      CategoryItem(categoryName: 'Gadget', imagePath: 'assets/images/smartwatch.png',),
-                      CategoryItem(categoryName: 'Cosmetic', imagePath: 'assets/images/shirt.png',),
-                      CategoryItem(categoryName: 'Grocery', imagePath: 'assets/images/food.png',),
-                    ],
-                  ),
-                ),
-
-                // Products Section
-                Container(
-                  height: screenHeight * 0.26,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: products.length + 1,
-                    itemBuilder: (context, index) {
-                      if (index == products.length) {
-                        return _buildProductMoreItem('assets/images/watch.png');
-                      } else {
-                        // Otherwise, show the ProductCard for each product
-                        final product = products[index];
-                        return ProductCard(product: product);
-                      }
-                    },
-                  ),
-                ),
-
-
-                SizedBox(height: 10),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        "Popular",
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 16,
-                          color: AppColors.gray01,
-                          fontWeight: FontWeight.w500,
+                    // App Bar
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.menu),
+                          onPressed: () {
+                            _scaffoldKey.currentState?.openDrawer();
+                          },
                         ),
+                        const CircleAvatar(
+                          backgroundImage: NetworkImage(
+                            'https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg',
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    // Title
+                    const Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: Text(
+                        "Find your favourite Product",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontFamily: 'Poppins',
+                          color: AppColors.gray01,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+
+                    // Search Bar
+                    SearchBarWithDropdown(
+                      items: _allItems,
+                      onSearch: _handleSearch,
+                      onCategorySelected: _handleCategorySelection,
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // Categories Section
+                    SizedBox(
+                      height: constraints.maxHeight * 0.15,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        children: const [
+                          CategoryItem(categoryName: 'Cloths', imagePath: 'assets/images/dress.png'),
+                          CategoryItem(categoryName: 'Furniture', imagePath: 'assets/images/sofa.png'),
+                          CategoryItem(categoryName: 'Gadget', imagePath: 'assets/images/smartwatch.png'),
+                          CategoryItem(categoryName: 'Cosmetic', imagePath: 'assets/images/shirt.png'),
+                          CategoryItem(categoryName: 'Grocery', imagePath: 'assets/images/food.png'),
+                        ],
                       ),
                     ),
 
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: InkWell(
-                        onTap: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PopularScreen(),
-                            ),
-                          );
+                    const SizedBox(height: 16),
+
+                    // Products Section
+                    SizedBox(
+                      height: constraints.maxHeight * 0.28,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: products.length + 1,
+                        itemBuilder: (context, index) {
+                          if (index == products.length) {
+                            return _buildProductMoreItem('assets/images/watch.png');
+                          } else {
+                            return ProductCard(product: products[index]);
+                          }
                         },
-                        child: Text(
-                          "View All",
+                      ),
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // Popular Section Header
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Popular",
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            fontSize: 12,
-                            color: AppColors.gray04,
+                            fontSize: 16,
+                            color: AppColors.gray01,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) => const PopularScreen(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            "View All",
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontSize: 12,
+                              color: AppColors.gray04,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 8),
+
+                    // Popular Products Section
+                    SizedBox(
+                      height: constraints.maxHeight * 0.15,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: popularproducts.length,
+                        itemBuilder: (context, index) {
+                          return PopularProductCard(
+                            popularproduct: popularproducts[index],
+                          );
+                        },
                       ),
                     ),
                   ],
                 ),
-
-                SizedBox(height: 10),
-
-                // Popular Products Section
-                Container(
-                  height: screenHeight * 0.12,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: popularproducts.length,
-                    itemBuilder: (context, index) {
-                      final product = popularproducts[index];
-                      return PopularProductCard(popularproduct: product,);
-                    },
-                  ),
-                ),
-
-
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -257,12 +233,12 @@ class _HomeScreenState extends State<HomeScreen> {
         final screenWidth = MediaQuery.of(context).size.width;
         final cardWidth = screenWidth * 0.4;
 
-        return GestureDetector(
+        return InkWell(
           onTap:() {
 
           },
           child: Container(
-            margin: EdgeInsets.all(5),
+            margin: const EdgeInsets.all(5),
             width: cardWidth,
             child: Container(
               decoration: BoxDecoration(
@@ -273,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.black.withOpacity(0.1),
                     spreadRadius: 0.5,
                     blurRadius: 5,
-                    offset: Offset(0, 2),
+                    offset: const Offset(0, 2),
                   ),
                 ],
               ),
@@ -294,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                          Center(
+                          const Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -341,76 +317,99 @@ class CategoryItem extends StatefulWidget {
   _CategoryItemState createState() => _CategoryItemState();
 }
 
-class _CategoryItemState extends State<CategoryItem> {
+class _CategoryItemState extends State<CategoryItem> with SingleTickerProviderStateMixin {
   bool isTapped = false;
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _handleTapDown(TapDownDetails details) {
+    _controller.forward();
+  }
+
+  void _handleTapUp(TapUpDetails details) {
+    _controller.reverse();
+    Navigator.push(
+      context,
+      CupertinoPageRoute(
+        builder: (context) => const CategoryScreen(),
+      ),
+    );
+  }
+
+  void _handleTapCancel() {
+    _controller.reverse();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final cardWidth = screenWidth * 0.2;
-
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          isTapped = !isTapped;
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CategoryScreen(),
-            ),
-          );
-
-        });
-      },
-      child: Container(
-        margin: EdgeInsets.all(5),
-        width: cardWidth,
-        child: Flexible(
-          child: Container(
-            color: AppColors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: AppColors.gray07,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            spreadRadius: 0.5,
-                            blurRadius: 5,
-                            offset: Offset(0, 2),
+    return AspectRatio(
+      aspectRatio: 0.8,
+      child: GestureDetector(
+        onTapDown: _handleTapDown,
+        onTapUp: _handleTapUp,
+        onTapCancel: _handleTapCancel,
+        child: AnimatedBuilder(
+          animation: _scaleAnimation,
+          builder: (context, child) {
+            return Transform.scale(
+              scale: _scaleAnimation.value,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Hero(
+                        tag: widget.imagePath,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.gray07,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                spreadRadius: 0.5,
+                                blurRadius: 5,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Image.asset(
-                              widget.imagePath,
-                              fit: BoxFit.contain,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Image.asset(
+                                widget.imagePath,
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 8),
-
-                  // Category Name
-                  Center(
-                    child: Text(
+                    const SizedBox(height: 8),
+                    Text(
                       widget.categoryName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         fontFamily: 'Poppins',
                         color: Colors.black,
@@ -419,176 +418,381 @@ class _CategoryItemState extends State<CategoryItem> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );
   }
 }
 
+
 class ProductCard extends StatefulWidget {
   final Product product;
 
-  ProductCard({required this.product});
+  const ProductCard({super.key, required this.product});
 
   @override
   _ProductCardState createState() => _ProductCardState();
 }
 
-class _ProductCardState extends State<ProductCard> {
+class _ProductCardState extends State<ProductCard> with SingleTickerProviderStateMixin {
   bool isFavorite = false;
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _handleTapDown(TapDownDetails details) {
+    _controller.forward();
+  }
+
+  void _handleTapUp(TapUpDetails details) {
+    _controller.reverse();
+    Navigator.push(
+      context,
+      CupertinoPageRoute(
+        builder: (context) => const ProductDetailsPage(),
+      ),
+    );
+  }
+
+  void _handleTapCancel() {
+    _controller.reverse();
+  }
 
   @override
   Widget build(BuildContext context) {
-
     final screenWidth = MediaQuery.of(context).size.width;
     final cardWidth = screenWidth * 0.4;
 
-
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ProductDetailsPage(),
-          ),
-        );
-      },
-      borderRadius: BorderRadius.circular(12),
-      splashColor: Colors.green.withOpacity(0.2),
-      child: Container(
-        margin: EdgeInsets.all(5),
-        width: cardWidth,
-        child: Ink(
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                spreadRadius: 0.5,
-                blurRadius: 5,
-                offset: Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Flexible(
-                  child: Stack(
+    return GestureDetector(
+      onTapDown: _handleTapDown,
+      onTapUp: _handleTapUp,
+      onTapCancel: _handleTapCancel,
+      child: AnimatedBuilder(
+        animation: _scaleAnimation,
+        builder: (context, child) {
+          return Transform.scale(
+            scale: _scaleAnimation.value,
+            child: Container(
+              margin: const EdgeInsets.all(5),
+              width: cardWidth,
+              child: Ink(
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      spreadRadius: 0.5,
+                      blurRadius: 5,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: AppColors.gray07,
-                          borderRadius: BorderRadius.circular(12),
+                      Flexible(
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: AppColors.gray07,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Image.asset(
+                                      widget.product.image,
+                                      height: 120,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 10,
+                              right: 10,
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isFavorite = !isFavorite;
+                                  });
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(isFavorite
+                                          ? "Added to Favorites"
+                                          : "Removed from Favorites"),
+                                    ),
+                                  );
+                                },
+                                borderRadius: BorderRadius.circular(20),
+                                splashColor: Colors.red.withOpacity(0.2),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Icon(
+                                    Icons.favorite,
+                                    color: isFavorite
+                                        ? Colors.red
+                                        : AppColors.gray04,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: ClipRRect(
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        widget.product.name,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.gray01,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 5),
+                      Row(
+                        children: [
+                          Text(
+                            '\$${widget.product.price}',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.greenColor,
+                            ),
+                          ),
+                          const Spacer(),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.star,
+                                color: AppColors.alert,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 5),
+                              Text(
+                                widget.product.rating.toString(),
+                                style: const TextStyle(
+                                  fontSize: 9,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.gray03,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class PopularProductCard extends StatefulWidget {
+  final PopularProduct popularproduct;
+
+  const PopularProductCard({super.key, required this.popularproduct});
+
+  @override
+  _PopularProductCardState createState() => _PopularProductCardState();
+}
+
+class _PopularProductCardState extends State<PopularProductCard> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _handleTapDown(TapDownDetails details) {
+    _controller.forward();
+  }
+
+  void _handleTapUp(TapUpDetails details) {
+    _controller.reverse();
+    Navigator.push(
+      context,
+      CupertinoPageRoute(
+        builder: (context) => const ProductDetailsPage(),
+      ),
+    );
+  }
+
+  void _handleTapCancel() {
+    _controller.reverse();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final cardWidth = screenWidth * 0.6;
+
+    return GestureDetector(
+      onTapDown: _handleTapDown,
+      onTapUp: _handleTapUp,
+      onTapCancel: _handleTapCancel,
+      child: AnimatedBuilder(
+        animation: _scaleAnimation,
+        builder: (context, child) {
+          return Transform.scale(
+            scale: _scaleAnimation.value,
+            child: Container(
+              margin: const EdgeInsets.all(5),
+              width: cardWidth,
+              child: Ink(
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      spreadRadius: 0.5,
+                      blurRadius: 5,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: AppColors.gray07,
                             borderRadius: BorderRadius.circular(12),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Image.asset(
-                                widget.product.image,
-                                height: 120,
-                                fit: BoxFit.contain,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Image.asset(
+                                  widget.popularproduct.imagePath,
+                                  height: 80,
+                                  fit: BoxFit.contain,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                      Positioned(
-                        top: 10,
-                        right: 10,
-                        child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              isFavorite = !isFavorite;
-                            });
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(isFavorite
-                                    ? "Added to Favorites"
-                                    : "Removed from Favorites"),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              widget.popularproduct.name,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
                               ),
-                            );
-                          },
-                          borderRadius: BorderRadius.circular(20),
-                          splashColor: Colors.red.withOpacity(0.2),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Icon(
-                              Icons.favorite,
-                              color: isFavorite
-                                  ? Colors.red
-                                  : AppColors.gray04,
-                              size: 20,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ),
+                            const SizedBox(height: 4),
+                            Row(
+                              children: [
+                                Text(
+                                  '\$${widget.popularproduct.price}',
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                const Spacer(),
+                                Container(
+                                  width: 20,
+                                  height: 20,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.green,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                    size: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 5),
-
-                Text(
-                  widget.product.name,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.gray01,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(height: 5),
-                Row(
-                  children: [
-                    Text(
-                      '\$' + widget.product.price.toString(),
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.greenColor,
-                      ),
-                    ),
-                    Spacer(),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.star,
-                          color: AppColors.alert,
-                          size: 20,
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          widget.product.rating.toString(),
-                          style: TextStyle(
-                            fontSize: 9,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.gray03,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -603,133 +807,7 @@ class Product {
   Product({required this.name, required this.price, required this.rating, required this.image});
 }
 
-class PopularProductCard extends StatefulWidget {
-  final PopularProduct popularproduct ;
 
-  PopularProductCard({required this.popularproduct});
-
-  @override
-  _PopularProductCardState createState() => _PopularProductCardState();
-}
-
-class _PopularProductCardState extends State<PopularProductCard> {
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final cardWidth = screenWidth * 0.6;
-
-    return Container(
-      margin: EdgeInsets.all(5),
-      width: cardWidth,
-      child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ProductDetailsPage(),
-            ),
-          );
-        },
-        borderRadius: BorderRadius.circular(12),
-        splashColor: Colors.green.withOpacity(0.2),
-        child: Ink(
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                spreadRadius: 0.5,
-                blurRadius: 5,
-                offset: Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Flexible(
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: AppColors.gray07,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Image.asset(
-                            widget.popularproduct.imagePath,
-                            height: 80,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        widget.popularproduct.name,
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: 4),
-                      Row(
-                        children: [
-                          Text(
-                            '\$' + widget.popularproduct.price.toString(),
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w600,
-                              color: Colors.green,
-                            ),
-                          ),
-                          Spacer(),
-                          Container(
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                              color: Colors.green,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: 15,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class PopularProduct {
   final String imagePath;

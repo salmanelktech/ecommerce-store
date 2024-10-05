@@ -1,4 +1,7 @@
 import 'package:eshop/src/app/presentation/screens/home/add_card.dart';
+import 'package:eshop/src/app/presentation/screens/home/order_stats.dart';
+import 'package:eshop/src/app/presentation/screens/home/payment_success.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../app_colors.dart';
@@ -102,11 +105,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: Padding(
-          padding: const EdgeInsets.all(10.0),
+        title: const Padding(
+          padding: EdgeInsets.all(10.0),
           child: Text(
             'Checkout',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 20,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
@@ -123,8 +126,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => CartScreen(),
+                  CupertinoPageRoute(
+                    builder: (context) => const CartScreen(),
                   ),
                 );
               },
@@ -215,8 +218,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => AddCreditCardScreen(),
+                          CupertinoPageRoute(
+                            builder: (context) => const AddCreditCardScreen(),
                           ),
                         );
                       },
@@ -278,7 +281,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   width: double.infinity,
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => OrderTrackingScreen(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.greenColor,
                       shape: RoundedRectangleBorder(
@@ -319,7 +329,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             color: Colors.black.withOpacity(0.1),
             spreadRadius: 0.5,
             blurRadius: 5,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -337,7 +347,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               children: [
                 Text(
                   address.title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
@@ -347,7 +357,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 const SizedBox(height: 8),
                 Text(
                   address.address,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.normal,
@@ -357,7 +367,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 const SizedBox(height: 8),
                 Text(
                   'Mobile: ${address.phone}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500,
@@ -391,7 +401,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             color: Colors.black.withOpacity(0.1),
             spreadRadius: 0.5,
             blurRadius: 5,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -406,7 +416,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           const SizedBox(width: 16),
           Text(
             '**** **** *${paymentMethod.lastFourDigits}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
@@ -414,7 +424,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ),
           ),
 
-          Spacer(),
+          const Spacer(),
 
           Radio(
             value: true,

@@ -93,7 +93,7 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
 
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
               ),
               child: SafeArea(
@@ -334,7 +334,6 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
 
   void _submitForm() {
     if (_formKey.currentState?.validate() ?? false) {
-      print('Form is valid');
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:eshop/app_colors.dart';
 import 'package:eshop/src/app/presentation/screens/home/cart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Product {
@@ -74,14 +75,14 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         centerTitle: true,
         actions: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: IconButton(
-              icon: Icon(Icons.shopping_bag_outlined, color: AppColors.gray03),
+              icon: const Icon(Icons.shopping_bag_outlined, color: AppColors.gray03),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => CartScreen(),
+                  CupertinoPageRoute(
+                    builder: (context) => const CartScreen(),
                   ),
                 );
               },
@@ -112,12 +113,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             color: AppColors.gray07,
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Container(
-                            child: Center(
-                              child: Image.asset(
-                                product.imagePath,
-                                fit: BoxFit.contain,
-                              ),
+                          child: Center(
+                            child: Image.asset(
+                              product.imagePath,
+                              fit: BoxFit.contain,
                             ),
                           ),
                         ),
@@ -173,8 +172,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(5),
                                           color: AppColors.gray05),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(3.0),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(3.0),
                                         child: Icon(
                                           Icons.remove,
                                           size: 20,
@@ -194,8 +193,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(5),
                                           color: AppColors.gray03),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(3.0),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(3.0),
                                         child: Icon(
                                           Icons.add,
                                           size: 20,
@@ -231,45 +230,43 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
                           // Color Options
 
-                          Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                // Colors Option
-                                Row(
-                                  children: List.generate(
-                                    product.availableColors.length,
-                                        (index) => Padding(
-                                      padding: const EdgeInsets.only(right: 8),
-                                      child: ColorOption(
-                                        color: product.availableColors[index],
-                                        isSelected:
-                                        selectedColorIndex == index,
-                                        onTap: () {
-                                          setState(() {
-                                            selectedColorIndex = index;
-                                          });
-                                        },
-                                      ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Colors Option
+                              Row(
+                                children: List.generate(
+                                  product.availableColors.length,
+                                      (index) => Padding(
+                                    padding: const EdgeInsets.only(right: 8),
+                                    child: ColorOption(
+                                      color: product.availableColors[index],
+                                      isSelected:
+                                      selectedColorIndex == index,
+                                      onTap: () {
+                                        setState(() {
+                                          selectedColorIndex = index;
+                                        });
+                                      },
                                     ),
                                   ),
                                 ),
+                              ),
 
-                                // Price
-                                Text(
-                                  '\$${product.price.toStringAsFixed(2)}',
-                                  style: const TextStyle(
-                                    fontSize: 28,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.greenColor,
-                                  ),
+                              // Price
+                              Text(
+                                '\$${product.price.toStringAsFixed(2)}',
+                                style: const TextStyle(
+                                  fontSize: 28,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.greenColor,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
 
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
 
                           // Description
                           const Text(
@@ -284,7 +281,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           const SizedBox(height: 8),
                           Text(
                             product.description,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.normal,
