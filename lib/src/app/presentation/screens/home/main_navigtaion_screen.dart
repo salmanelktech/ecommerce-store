@@ -1,7 +1,7 @@
 import 'package:eshop/src/app/presentation/screens/home/cart.dart';
 import 'package:eshop/src/app/presentation/screens/home/home_screen.dart';
 import 'package:eshop/src/app/presentation/screens/home/notification_screen.dart';
-import 'package:eshop/src/app/presentation/screens/home/reveiws_screen.dart';
+import 'package:eshop/src/app/presentation/screens/home/account.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../app_colors.dart';
@@ -20,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const CartScreen(),
     NotificationsScreen(),
-    ReviewsScreen(),
+    Account(),
   ];
 
   // for smooth transitions

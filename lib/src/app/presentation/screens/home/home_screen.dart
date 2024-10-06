@@ -332,11 +332,12 @@ class _CategoryItemState extends State<CategoryItem> with SingleTickerProviderSt
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 150),
       vsync: this,
     );
     _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+      CurvedAnimation(parent: _controller,         curve: Curves.easeOutQuart,
+        reverseCurve: Curves.easeInQuart,),
     );
   }
 
@@ -461,11 +462,12 @@ class _ProductCardState extends State<ProductCard> with SingleTickerProviderStat
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 150),
       vsync: this,
     );
     _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+      CurvedAnimation(parent: _controller,         curve: Curves.easeOutQuart,
+        reverseCurve: Curves.easeInQuart,),
     );
   }
 
@@ -667,11 +669,12 @@ class _PopularProductCardState extends State<PopularProductCard> with SingleTick
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 150),
       vsync: this,
     );
     _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+      CurvedAnimation(parent: _controller,         curve: Curves.easeOutQuart,
+        reverseCurve: Curves.easeInQuart,),
     );
   }
 
