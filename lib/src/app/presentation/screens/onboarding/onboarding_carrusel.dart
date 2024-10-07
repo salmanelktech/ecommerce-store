@@ -27,6 +27,7 @@ class _OnboardingCarruselState extends State<OnboardingCarrusel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [

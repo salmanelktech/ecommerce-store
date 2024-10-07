@@ -65,10 +65,10 @@ class NotificationsScreen extends StatelessWidget {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: AppColors.gray03),
+          icon: const Icon(Icons.arrow_back, color: AppColors.gray03),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(
+        title: const Text(
           'Notifications',
           style: TextStyle(
             fontSize: 20,
@@ -78,10 +78,11 @@ class NotificationsScreen extends StatelessWidget {
           ),
         ),
         backgroundColor: Colors.white,
+        centerTitle: true,
         elevation: 0,
       ),
       body: ListView.builder(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         itemCount: notifications.length,
         itemBuilder: (context, index) {
           return NotificationItem(notification: notifications[index]);
@@ -138,6 +139,10 @@ class _NotificationItemState extends State<NotificationItem> with SingleTickerPr
   void _handleTapUp(TapUpDetails details) {
     Future.delayed(const Duration(milliseconds: 100), () {
       _controller.reverse();
+    });
+
+    Future.delayed(const Duration(milliseconds: 100), () {
+      //navigation
     });
   }
 

@@ -1,8 +1,14 @@
 import 'package:eshop/app_colors.dart';
+import 'package:eshop/src/app/presentation/screens/auth/log_in.dart';
 import 'package:eshop/src/app/presentation/screens/home/invite_friend.dart';
 import 'package:eshop/src/app/presentation/screens/home/notification_screen.dart';
+import 'package:eshop/src/app/presentation/screens/home/payment_success.dart';
+import 'package:eshop/src/app/presentation/screens/home/reveiws_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'card_blank.dart';
+import 'order_failed.dart';
 
 class Account extends StatelessWidget {
   const Account({Key? key}) : super(key: key);
@@ -16,12 +22,17 @@ class Account extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 50),
-              // Profile Image, Name and Email
-              CircleAvatar(
+
+              // Profile Image
+              const CircleAvatar(
                 radius: 35,
-                backgroundImage: AssetImage('assets/profile_image.jpg'),
+                backgroundImage: NetworkImage(
+                  'https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg',
+                ),
               ),
               const SizedBox(height: 16),
+
+              //Name
               const Text(
                 'Name',
                 style: TextStyle(
@@ -32,7 +43,9 @@ class Account extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 4),
-              Text(
+
+              //Email
+              const Text(
                 'www.@example.com',
                 style: TextStyle(
                   fontFamily: 'Poppins',
@@ -41,7 +54,8 @@ class Account extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              // Menu Items
+
+              // Settings List
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
@@ -49,18 +63,32 @@ class Account extends StatelessWidget {
                     _buildMenuItem(
                       icon: Icons.credit_card_outlined,
                       title: 'Payment Methods',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => PaymentSuccessScreen(),
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(height: 8),
                     _buildMenuItem(
                       icon: Icons.person_outline,
                       title: 'Account Information',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => ReviewsScreen(),
+                          ),
+                        );
+                      },
                     ),
 
                     const SizedBox(height: 8),
 
-                    Divider(
+                    const Divider(
                       height: 1,
                       color: AppColors.gray06,
                     ),
@@ -86,7 +114,7 @@ class Account extends StatelessWidget {
                         Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => InviteFriendsScreen(),
+                            builder: (context) => const InviteFriendsScreen(),
                           ),
                         );
                       },
@@ -95,20 +123,42 @@ class Account extends StatelessWidget {
                     _buildMenuItem(
                       icon: Icons.settings_outlined,
                       title: 'Settings',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => OrderFailed(),
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(height: 8),
                     _buildMenuItem(
                       icon: Icons.description_outlined,
                       title: 'Terms of services',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => CardBlank(),
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(height: 20),
                     _buildLogoutItem(
                       icon: Icons.logout_outlined,
                       title: 'Log Out',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => const SignInScreen(),
+                          ),
+                        );
+                      },
                     ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -118,6 +168,9 @@ class Account extends StatelessWidget {
       ),
     );
   }
+
+
+  // Setting List Item View
 
   Widget _buildMenuItem({
     required IconData icon,
@@ -145,6 +198,8 @@ class Account extends StatelessWidget {
   }
 }
 
+
+//ListItem Design with Click Animation effect
 class MenuItem extends StatefulWidget {
   final IconData icon;
   final String title;
@@ -166,7 +221,6 @@ class MenuItem extends StatefulWidget {
 class _MenuItemState extends State<MenuItem> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
-  bool _isPressed = false;
 
   @override
   void initState() {
@@ -191,17 +245,22 @@ class _MenuItemState extends State<MenuItem> with SingleTickerProviderStateMixin
   }
 
   void _handleTapDown(TapDownDetails details) {
-    setState(() => _isPressed = true);
     _controller.forward();
   }
 
   void _handleTapUp(TapUpDetails details) {
-    setState(() => _isPressed = false);
-    _controller.reverse();
+    Future.delayed(const Duration(milliseconds: 100), () {
+      _controller.reverse();
+    });
+
+
+    Future.delayed(const Duration(milliseconds: 100), () {
+      // Add code here for navigation
+      widget.onTap();
+    });
   }
 
   void _handleTapCancel() {
-    setState(() => _isPressed = false);
     _controller.reverse();
   }
 

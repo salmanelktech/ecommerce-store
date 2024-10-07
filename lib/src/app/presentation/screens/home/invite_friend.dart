@@ -146,6 +146,7 @@ class InviteFriendsScreen extends StatelessWidget {
   }) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
+      splashColor: Colors.transparent,
       leading: Container(
         width: 40,
         height: 40,

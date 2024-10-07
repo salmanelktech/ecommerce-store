@@ -29,7 +29,9 @@ dependencies:
   shared_preferences: ^2.2.3
   flutter_svg: ^2.0.10+1
   carousel_slider: ^5.0.0
+  flutter_launcher_icons: ^0.14.1
   font_awesome_flutter: ^10.5.0
+
 
 dev_dependencies:
   flutter_test:
@@ -41,12 +43,16 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+
+
 # The following section is specific to Flutter packages.
 flutter:
+
+
+
 
   uses-material-design: true
 
@@ -57,9 +63,19 @@ flutter:
     - assets/fonts/
 
 
-  # example:
   fonts:
-    - family: Poppins-Regular
+    - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Regular.ttf
- 
+        - asset: assets/fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins-Light.ttf
+        - asset: assets/fonts/Poppins-Medium.ttf
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+
+flutter_icons:
+  image_path: "assets/images/applogo.png"
+  android: true
+  ios: true
+  min_sdk_android: 21
+  remove_alpha_ios: true
+  background_color_ios: "#13544E"

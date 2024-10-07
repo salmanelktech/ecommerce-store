@@ -7,6 +7,8 @@ import 'package:eshop/src/app/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../../../app_colors.dart';
+
 class ControlButton extends StatelessWidget {
   const ControlButton({
     Key? key,
@@ -54,8 +56,9 @@ class ControlButton extends StatelessWidget {
                     "Skip",
                     style: TextStyle(
                       fontSize: 16,
+                      fontFamily: 'Poppins',
                       fontWeight: FontWeight.w600,
-                      color: kLightGreyColor,
+                      color: AppColors.gray04,
                     ),
                   ),
                 ),

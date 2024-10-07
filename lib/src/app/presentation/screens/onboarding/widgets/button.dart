@@ -2,6 +2,8 @@ import 'package:eshop/src/app/presentation/theme/color_theme.dart';
 import 'package:eshop/src/app/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../../app_colors.dart';
+
 class ButtonNext extends StatelessWidget {
   final VoidCallback onPressed;
   final String buttonText;
@@ -27,8 +29,9 @@ class ButtonNext extends StatelessWidget {
         child: Text(
           buttonText,
           style: const TextStyle(
-            color: kWhiteColor,
+            color: AppColors.white,
             fontSize: 16,
+            fontFamily: 'Poppins',
             fontWeight: FontWeight.w600,
           ),
         ),

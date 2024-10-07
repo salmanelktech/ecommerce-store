@@ -32,6 +32,7 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        centerTitle: true,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.gray03),
@@ -91,6 +92,8 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
               ),
             ),
 
+
+            // Button
             Container(
               padding: const EdgeInsets.all(16),
               decoration: const BoxDecoration(

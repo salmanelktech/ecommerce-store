@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../app_colors.dart';
+
 class DescriptionWidget extends StatefulWidget {
   final int index;
 
@@ -23,9 +25,9 @@ class _DescriptionWidgetState extends State<DescriptionWidget> {
             _getDescription(),
             textAlign: TextAlign.center,
             style: const TextStyle(
-              color: Color.fromRGBO(64, 64, 64, 1),
-              fontFamily: 'Manrope',
-              fontSize: 32,
+              color: AppColors.gray01,
+              fontFamily: 'Poppins',
+              fontSize: 20,
               letterSpacing: 0,
               fontWeight: FontWeight.bold,
               height: 1.5,
@@ -36,8 +38,8 @@ class _DescriptionWidgetState extends State<DescriptionWidget> {
             _getDescriptionDetail(),
             textAlign: TextAlign.center,
             style: const TextStyle(
-              color: Color.fromRGBO(117, 117, 117, 1),
-              fontFamily: 'Manrope',
+              color: AppColors.gray03,
+              fontFamily: 'Poppins',
               fontSize: 18,
               letterSpacing: 0,
               fontWeight: FontWeight.normal,

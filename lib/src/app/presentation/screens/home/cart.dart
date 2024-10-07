@@ -42,21 +42,6 @@ class _CartScreenState extends State<CartScreen> {
       price: 200.00,
       image: 'assets/images/ssofa.png',
     ),
-    CartItem(
-      name: 'Face Mask',
-      price: 15.00,
-      image: 'assets/images/sshirt.png',
-    ),
-    CartItem(
-      name: 'Earphone',
-      price: 120.00,
-      image: 'assets/images/headphone.png',
-    ),
-    CartItem(
-      name: 'Modern Sofa',
-      price: 200.00,
-      image: 'assets/images/ssofa.png',
-    ),
   ];
 
   double get totalCost {
@@ -74,7 +59,7 @@ class _CartScreenState extends State<CartScreen> {
           icon: const Icon(Icons.arrow_back_ios, color: AppColors.gray03),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(
+        title: const Text(
           'Cart',
           style: TextStyle(
             fontSize: 20,

@@ -1,6 +1,5 @@
 import 'package:eshop/src/app/presentation/screens/home/add_card.dart';
 import 'package:eshop/src/app/presentation/screens/home/order_stats.dart';
-import 'package:eshop/src/app/presentation/screens/home/payment_success.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -104,7 +103,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: Text(
+        title: const Text(
           'Checkout',
           style: TextStyle(
             fontSize: 20,

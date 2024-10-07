@@ -8,16 +8,10 @@ import 'Searchbar.dart';
 final List<Map<String, dynamic>> dummyItems = [
   {'name': 'Plastic table', 'category': 'Table'},
   {'name': 'New office table', 'category': 'Table'},
-  {'name': 'Wooden reading table', 'category': 'Table'},
-  {'name': 'Dining table', 'category': 'Table'},
-  {'name': 'Low price table', 'category': 'Table'},
   {'name': 'Leather sofa', 'category': 'Furniture'},
   {'name': 'Wooden chair', 'category': 'Furniture'},
-  {'name': 'Bookshelf', 'category': 'Furniture'},
-  {'name': 'Coffee table', 'category': 'Furniture'},
   {'name': 'Wardrobe', 'category': 'Almari'},
   {'name': 'Closet', 'category': 'Almari'},
-  {'name': 'Storage cabinet', 'category': 'Almari'},
 ];
 
 
@@ -217,11 +211,12 @@ class _ProductCardState extends State<ProductCard> with SingleTickerProviderStat
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 150),
       vsync: this,
     );
     _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+      CurvedAnimation(parent: _controller,         curve: Curves.easeOutQuart,
+          reverseCurve: Curves.easeInQuart),
     );
   }
 

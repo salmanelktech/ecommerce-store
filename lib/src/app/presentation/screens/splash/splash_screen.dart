@@ -1,3 +1,4 @@
+import 'package:eshop/app_colors.dart';
 import 'package:eshop/src/app/presentation/components/app_logo_widget.dart';
 import 'package:eshop/src/app/presentation/screens/splash/splash_services.dart';
 import 'package:eshop/src/app/presentation/theme/color_theme.dart';
@@ -22,6 +23,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: AppColors.gray01,
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(color: kPrimaryColor),

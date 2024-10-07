@@ -182,29 +182,27 @@ class _FiltersScreenState extends State<FiltersScreen> {
                           )
                       ).toList(),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 30),
 
-                    Container(
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: 60,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.greenColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25),
-                            ),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 60,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.greenColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
                           ),
-                          onPressed: () {},
-                          child: const Text(
-                              'Apply Filter',
-                              style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500
-                              )
-                          ),
+                        ),
+                        onPressed: () {},
+                        child: const Text(
+                            'Apply Filter',
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500
+                            )
                         ),
                       ),
                     ),

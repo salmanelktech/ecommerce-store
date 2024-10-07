@@ -16,7 +16,7 @@ class OrderStatus {
 }
 
 class OrderTrackingScreen extends StatefulWidget {
-  OrderTrackingScreen({Key? key}) : super(key: key);
+  const OrderTrackingScreen({Key? key}) : super(key: key);
 
   @override
   State<OrderTrackingScreen> createState() => _OrderTrackingScreenState();
@@ -67,7 +67,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
           icon: const Icon(Icons.arrow_back_ios, color: AppColors.gray03),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(
+        title: const Text(
           'Order Stats',
           style: TextStyle(
             fontSize: 20,
@@ -94,7 +94,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -114,7 +114,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                     children: [
                       Text(
                         "Order ID : $orderId",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w500,
@@ -123,7 +123,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                       ),
                       Text(
                         "Amount: \$${amount.toStringAsFixed(2)}",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.normal,
@@ -145,7 +145,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                 children: [
                   Text(
                     "ETA : $eta",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500,
@@ -170,11 +170,11 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                                 Container(
                                   width: 30,
                                   height: 30,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: AppColors.greenColor,
                                     shape: BoxShape.circle,
                                   ),
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.check,
                                     color: Colors.white,
                                     size: 20,
@@ -195,7 +195,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                                 children: [
                                   Text(
                                     orderStatuses[index].status,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12,
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w500,
@@ -204,20 +204,20 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                                   ),
                                   Text(
                                     orderStatuses[index].description,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12,
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.normal,
                                       color: AppColors.gray04,
                                     ),
                                   ),
-                                  SizedBox(height: 24),
+                                  const SizedBox(height: 24),
                                 ],
                               ),
                             ),
                             Text(
                               orderStatuses[index].date,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 12,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w500,
@@ -234,7 +234,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
             ),
 
 
-            Expanded(
+            const Expanded(
               flex: 1,
               child: SizedBox(),
             ),

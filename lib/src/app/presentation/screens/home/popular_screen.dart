@@ -31,7 +31,7 @@ class _PopularScreenState extends State<PopularScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-          title: Text(
+          title: const Text(
             'Popular',
             style: TextStyle(
               fontSize: 20,
@@ -130,7 +130,6 @@ class FilterSortButton extends StatefulWidget {
 class _FilterSortButtonState extends State<FilterSortButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<double> _scale;
 
   @override
   void initState() {
@@ -143,10 +142,6 @@ class _FilterSortButtonState extends State<FilterSortButton>
     )..addListener(() {
       setState(() {});
     });
-    _scale = Tween<double>(begin: 1.0, end: 0.9).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
   }
 
   @override
@@ -241,11 +236,12 @@ class _ProductCardState extends State<ProductCard> with SingleTickerProviderStat
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 150),
       vsync: this,
     );
     _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+      CurvedAnimation(parent: _controller,         curve: Curves.easeOutQuart,
+          reverseCurve: Curves.easeInQuart),
     );
   }
 

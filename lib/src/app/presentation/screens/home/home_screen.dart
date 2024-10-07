@@ -70,155 +70,157 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
   @override
+  @override
   Widget build(BuildContext context) {
+
+    const double minCategoryHeight = 110.0;
+    const double minProductHeight = 200.0;
+    const double minPopularHeight = 100.0;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
       backgroundColor: AppColors.white,
       body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // App Bar
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // App Bar
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.menu),
-                          onPressed: () {
-                            _scaffoldKey.currentState?.openDrawer();
-                          },
-                        ),
-                        const CircleAvatar(
-                          backgroundImage: NetworkImage(
-                            'https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg',
-                          ),
-                        ),
-                      ],
+                    IconButton(
+                      icon: const Icon(Icons.menu),
+                      onPressed: () {
+                        _scaffoldKey.currentState?.openDrawer();
+                      },
                     ),
-
-                    // Title
-                    const Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Text(
-                        "Find your favourite Product",
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontFamily: 'Poppins',
-                          color: AppColors.gray01,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-
-                    // Search Bar
-                    SearchBarWithDropdown(
-                      items: _allItems,
-                      onSearch: _handleSearch,
-                      onCategorySelected: _handleCategorySelection,
-                    ),
-
-                    const SizedBox(height: 16),
-
-                    // Categories Section
-                    SizedBox(
-                      height: constraints.maxHeight * 0.15,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        children: const [
-                          CategoryItem(categoryName: 'Cloths', imagePath: 'assets/images/dress.png'),
-                          CategoryItem(categoryName: 'Furniture', imagePath: 'assets/images/sofa.png'),
-                          CategoryItem(categoryName: 'Gadget', imagePath: 'assets/images/smartwatch.png'),
-                          CategoryItem(categoryName: 'Cosmetic', imagePath: 'assets/images/shirt.png'),
-                          CategoryItem(categoryName: 'Grocery', imagePath: 'assets/images/food.png'),
-                        ],
-                      ),
-                    ),
-
-                    const SizedBox(height: 16),
-
-                    // Products Section
-                    SizedBox(
-                      height: constraints.maxHeight * 0.28,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: products.length + 1,
-                        itemBuilder: (context, index) {
-                          if (index == products.length) {
-                            return _buildProductMoreItem('assets/images/watch.png');
-                          } else {
-                            return ProductCard(product: products[index]);
-                          }
-                        },
-                      ),
-                    ),
-
-                    const SizedBox(height: 16),
-
-                    // Popular Section Header
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Popular",
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 16,
-                            color: AppColors.gray01,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (context) => const PopularScreen(),
-                              ),
-                            );
-                          },
-                          child: const Text(
-                            "View All",
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 12,
-                              color: AppColors.gray04,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 8),
-
-                    // Popular Products Section
-                    SizedBox(
-                      height: constraints.maxHeight * 0.13,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: popularproducts.length,
-                        itemBuilder: (context, index) {
-                          return PopularProductCard(
-                            popularproduct: popularproducts[index],
-                          );
-                        },
+                    const CircleAvatar(
+                      backgroundImage: NetworkImage(
+                        'https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg',
                       ),
                     ),
                   ],
                 ),
-              ),
-            );
-          },
+
+                // Title
+                const Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Text(
+                    "Find your favourite Product",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontFamily: 'Poppins',
+                      color: AppColors.gray01,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const SizedBox(height: 10),
+
+                // Search Bar
+                SearchBarWithDropdown(
+                  items: _allItems,
+                  onSearch: _handleSearch,
+                  onCategorySelected: _handleCategorySelection,
+                ),
+
+                const SizedBox(height: 16),
+
+                // Categories Section
+                SizedBox(
+                  height: minCategoryHeight,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    children: const [
+                      CategoryItem(categoryName: 'Cloths', imagePath: 'assets/images/dress.png'),
+                      CategoryItem(categoryName: 'Furniture', imagePath: 'assets/images/sofa.png'),
+                      CategoryItem(categoryName: 'Gadget', imagePath: 'assets/images/smartwatch.png'),
+                      CategoryItem(categoryName: 'Cosmetic', imagePath: 'assets/images/shirt.png'),
+                      CategoryItem(categoryName: 'Grocery', imagePath: 'assets/images/food.png'),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 16),
+
+                // Products Section
+                SizedBox(
+                  height: minProductHeight,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: products.length + 1,
+                    itemBuilder: (context, index) {
+                      if (index == products.length) {
+                        return _buildProductMoreItem('assets/images/watch.png');
+                      } else {
+                        return ProductCard(product: products[index]);
+                      }
+                    },
+                  ),
+                ),
+
+                const SizedBox(height: 16),
+
+                // Popular Section Header
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Popular",
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 16,
+                        color: AppColors.gray01,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => const PopularScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        "View All",
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 12,
+                          color: AppColors.gray04,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 8),
+
+                // Popular Products Section
+                SizedBox(
+                  height: minPopularHeight,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: popularproducts.length,
+                    itemBuilder: (context, index) {
+                      return PopularProductCard(
+                        popularproduct: popularproducts[index],
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -336,8 +338,9 @@ class _CategoryItemState extends State<CategoryItem> with SingleTickerProviderSt
       vsync: this,
     );
     _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _controller,         curve: Curves.easeOutQuart,
-        reverseCurve: Curves.easeInQuart,),
+      CurvedAnimation(parent: _controller,
+        curve: Curves.easeOutQuart,
+        reverseCurve: Curves.easeInQuart),
     );
   }
 
@@ -385,54 +388,52 @@ class _CategoryItemState extends State<CategoryItem> with SingleTickerProviderSt
               scale: _scaleAnimation.value,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Hero(
-                          tag: widget.imagePath,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColors.gray07,
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  spreadRadius: 0.5,
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Image.asset(
-                                  widget.imagePath,
-                                  fit: BoxFit.contain,
-                                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Hero(
+                        tag: widget.imagePath,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.gray07,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                spreadRadius: 0.5,
+                                blurRadius: 5,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Image.asset(
+                                widget.imagePath,
+                                fit: BoxFit.contain,
                               ),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        widget.categoryName,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontFamily: 'Poppins',
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      widget.categoryName,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'Poppins',
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
                       ),
-                    ],
-                  ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
               ),
             );

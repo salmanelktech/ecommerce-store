@@ -58,10 +58,10 @@ class ReviewsScreen extends StatelessWidget {
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: AppColors.gray03),
+          icon: const Icon(Icons.arrow_back, color: AppColors.gray03),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(
+        title: const Text(
           'Reviews',
           style: TextStyle(
             fontSize: 20,
@@ -72,15 +72,16 @@ class ReviewsScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_bag_outlined, color: AppColors.gray03),
+            icon: const Icon(Icons.shopping_bag_outlined, color: AppColors.gray03),
             onPressed: () {},
           ),
         ],
+        centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
       ),
       body: ListView.builder(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         itemCount: reviews.length,
         itemBuilder: (context, index) {
           return ReviewItem(review: reviews[index]);
@@ -101,7 +102,7 @@ class ReviewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -109,12 +110,12 @@ class ReviewItem extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
             blurRadius: 8,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -127,34 +128,34 @@ class ReviewItem extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     review.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w600,
                       color: AppColors.gray01,
                     ),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     review.time,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
                       color: AppColors.gray02,
                     ),
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   Text(
                     review.review,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w600,
@@ -167,7 +168,7 @@ class ReviewItem extends StatelessWidget {
             Row(
               children: List.generate(
                 5,
-                    (index) => Icon(
+                    (index) => const Icon(
                   Icons.star,
                   color: Colors.amber,
                   size: 20,

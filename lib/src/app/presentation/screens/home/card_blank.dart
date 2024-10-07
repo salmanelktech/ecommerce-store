@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../../../app_colors.dart';
 
 
-class PaymentSuccessScreen extends StatelessWidget {
-  const PaymentSuccessScreen({Key? key}) : super(key: key);
+class CardBlank extends StatelessWidget {
+  const CardBlank({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +24,9 @@ class PaymentSuccessScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
 
-
-                //Image
-
                 Center(
                   child: Image.asset(
-                    'assets/images/payment.png',
+                    'assets/images/cardblank.png',
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -37,11 +34,9 @@ class PaymentSuccessScreen extends StatelessWidget {
                 const SizedBox(height: 20),
 
 
-                //Text Title
-
                 const Center(
                   child: Text(
-                    'Success',
+                    'You have no order yet.',
                     style: TextStyle(
                       fontSize: 28,
                       fontFamily: 'Poppins',
@@ -54,11 +49,9 @@ class PaymentSuccessScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                //Text Description
-
                 const Center(
                   child: Text(
-                    'You  have successfully make payment. \n Keep patient for delivery',
+                    'Find your desairable product',
                     style: TextStyle(
                       fontSize: 14,
                       fontFamily: 'Poppins',
@@ -72,16 +65,10 @@ class PaymentSuccessScreen extends StatelessWidget {
             ),
 
 
-            //For Blank Space above button
-
             const Expanded(
               flex: 1,
               child: SizedBox(),
             ),
-
-
-
-            //Button
 
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -102,7 +89,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                     onTap: (){
                     },
                     child: const Text(
-                      'Done',
+                      'Order Now',
                       style: TextStyle(
                         fontSize: 16,
                         fontFamily: 'Poppins',
